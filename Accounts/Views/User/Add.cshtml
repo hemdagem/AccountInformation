@@ -15,6 +15,10 @@
         @Html.TextBoxFor(x => x.Amount, new { @placeholder = "Enter Amount", @class = "form-control", @type = "number", @min = "0" })
     </div>
 
+    <div class="form-group">
+        @Html.LabelFor(x => x.PayDay, "Enter Pay Day")
+        @Html.TextBoxFor(x => x.PayDay, new { @placeholder = "Enter Pay Day", @class = "form-control", @type = "number", @min = "1", @max="31" })
+    </div>
 
     <button type="submit" class="btn btn-default">Submit</button>
 

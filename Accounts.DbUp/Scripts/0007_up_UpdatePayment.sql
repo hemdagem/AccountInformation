@@ -21,7 +21,8 @@ ALTER PROCEDURE [dbo].[up_UpdatePayment]
 	@Date datetime,
 	@PaidYearly bit,
 	@Id uniqueidentifier,
-	@Recurring bit
+	@Recurring bit,
+	@Title nvarchar(max)
 
 AS
 BEGIN
@@ -30,7 +31,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	UPDATE Payments SET Amount=@Amount, Date=@Date, PaidYearly=@PaidYearly, Recurring=@Recurring
+	UPDATE Payments SET Amount=@Amount, Date=@Date, PaidYearly=@PaidYearly, Recurring=@Recurring, Title=@Title
 	WHERE Id=@Id
 
 	SELECT @@ROWCOUNT

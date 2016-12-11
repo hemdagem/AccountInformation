@@ -6,7 +6,7 @@ IF NOT EXISTS(SELECT 1 FROM sys.tables  WHERE Name = 'Income')
 BEGIN
 /****** Object:  Table [dbo].[Income]    Script Date: 11/12/2016 00:34:16 ******/
 CREATE TABLE [dbo].[Income](
-	[Id] [uniqueidentifier] NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Income_Id]  DEFAULT (newsequentialid()),
 	[Name] [nvarchar](max) NULL,
 	[Amount] [decimal](19, 4) NULL,
 	[PayDay] [int] NULL,
@@ -21,7 +21,7 @@ GO
 IF NOT EXISTS(SELECT 1 FROM sys.tables  WHERE Name = 'Payments')
 BEGIN
 CREATE TABLE [dbo].[Payments](
-	[Id] [uniqueidentifier] NOT NULL,
+	[Id] [uniqueidentifier] NOT NULL CONSTRAINT [DF_Payments_Id]  DEFAULT (newsequentialid()),
 	[IncomeId] [uniqueidentifier] NOT NULL,
 	[Date] [datetime] NOT NULL,
 	[Amount] [decimal](19, 4) NOT NULL,

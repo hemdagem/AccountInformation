@@ -34,7 +34,6 @@ namespace Accounts.Core.Repositories
             var paymentModels = _paymentModelBuilder.Build(paymentList);
 
             return paymentModels;
-
         }
 
         public async Task<Guid> AddPayment(PaymentModel model)
@@ -44,8 +43,9 @@ namespace Accounts.Core.Repositories
             var dateParameter = new SqlParameter("Date", model.Date);
             var paidYearlyParameter = new SqlParameter("PaidYearly", model.PaidYearly);
             var recurringParameter = new SqlParameter("Recurring", model.Recurring);
+            var titleParameter = new SqlParameter("Title", model.Title);
 
-            var paymentList = await  _dataAccess.ExecuteScalar<Guid>("up_AddPayment", idParameter, amountParameter, dateParameter, paidYearlyParameter, recurringParameter);
+            var paymentList = await _dataAccess.ExecuteScalar<Guid>("up_AddPayment", idParameter, amountParameter, dateParameter, paidYearlyParameter, recurringParameter, titleParameter);
 
             if (paymentList == Guid.Empty)
             {
@@ -62,8 +62,9 @@ namespace Accounts.Core.Repositories
             var dateParameter = new SqlParameter("Date", model.Date);
             var paidYearlyParameter = new SqlParameter("PaidYearly", model.PaidYearly);
             var recurringParameter = new SqlParameter("Recurring", model.Recurring);
+            var titleParameter = new SqlParameter("Title", model.Title);
 
-            return await _dataAccess.ExecuteScalar<int>("up_UpdatePayment", amountParameter, dateParameter, paidYearlyParameter, idParameter, recurringParameter);
+            return await _dataAccess.ExecuteScalar<int>("up_UpdatePayment", amountParameter, dateParameter, paidYearlyParameter, idParameter, recurringParameter, titleParameter);
         }
 
         public async Task<int> DeletePayment(Guid guid)
