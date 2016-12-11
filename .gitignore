@@ -252,4 +252,5 @@ paket-files/
 *.sln.iml
 *.orig
 
-Content/*.min.*
+Accounts/Content/*.min.css
+Accounts/Content/style.min.css
