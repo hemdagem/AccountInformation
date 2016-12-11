@@ -23,7 +23,8 @@ namespace Tests
         private PaymentModel _paymentModel;
         private Mock<IPaymentModelBuilder> _paymentModelBuilderMock;
 
-        private void Setup()
+        [SetUp]
+        public void Setup()
         {
             _guid = Guid.NewGuid();
             _dataAccessMock = new Mock<IDbConnectionFactory>();
@@ -57,7 +58,6 @@ namespace Tests
         public async Task ShouldReturnDataWhenUserIsFound()
         {
             //given
-            Setup();
 
             var dictionary = new Dictionary<string, object>
             {
@@ -91,8 +91,6 @@ namespace Tests
         public void GetPaymentsById_Should_throw_null_exception_when_no_data_is_found()
         {
             //given
-            Setup();
-
             _dataAccessMock.Setup(x => x.ExecuteReader("up_GetPaymentsById", It.IsAny<SqlParameter>())).Returns(Task.FromResult<IDataReader>(null));
             //when
 
@@ -105,7 +103,6 @@ namespace Tests
         public async Task ShouldReturnNewGuidWhenPaymentAdded()
         {
             //given
-            Setup();
             _dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddPayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(),
                 It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(_guid));
 
@@ -121,8 +118,6 @@ namespace Tests
         public async Task ShouldThrowExceptionWhenNothingisReturned()
         {
             //given
-            Setup();
-
             var guidSqlParameter = new SqlParameter("IncomeId", _paymentModel.Id);
             var amountSqlParameter = new SqlParameter("Amount", _paymentModel.Amount);
             var dateSqlParameter = new SqlParameter("Amount", _paymentModel.Date);
@@ -142,7 +137,6 @@ namespace Tests
         public async Task ShouldReturnRowsAffectedWhenDeletingPayment(int rowsAffected)
         {
             //given
-            Setup();
             _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_DeletePayment", It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var deletePayment = await _paymentRepository.DeletePayment(_guid);
@@ -156,7 +150,6 @@ namespace Tests
         public async Task ShouldReturnRowsAffectedWhenUpdatingPayment(int rowsAffected)
         {
             //given
-            Setup();
             _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdatePayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var updatePayment = await _paymentRepository.UpdatePayment(_paymentModel);

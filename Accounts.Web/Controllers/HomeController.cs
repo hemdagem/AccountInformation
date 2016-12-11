@@ -29,7 +29,6 @@ namespace Accounts.Controllers
         public async Task<ActionResult> Index(Guid id)
         {
             var homeControllerModel = new HomeControllerModel { Users = id };
-
             var userModel = await _userRepository.GetUser(id);
 
             if (userModel == null)
@@ -60,14 +59,12 @@ namespace Accounts.Controllers
         {
             var buildCoreModel = _mapper.Map<Core.Models.PaymentModel>(model);
             Guid addPayment = await _paymentRepository.AddPayment(buildCoreModel);
-
             return Json(addPayment, JsonRequestBehavior.AllowGet);
         }
 
         public async Task<JsonResult> DeletePayment(Guid paymentId)
         {
             int addPayment = await _paymentRepository.DeletePayment(paymentId);
-
             return Json(addPayment, JsonRequestBehavior.AllowGet);
         }
 
@@ -75,7 +72,6 @@ namespace Accounts.Controllers
         {
             var buildCoreModel = _mapper.Map<Core.Models.PaymentModel>(model);
             int addPayment = await _paymentRepository.UpdatePayment(buildCoreModel);
-
             return Json(addPayment, JsonRequestBehavior.AllowGet);
         }
     }

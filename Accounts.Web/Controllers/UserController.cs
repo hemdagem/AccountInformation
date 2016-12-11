@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Accounts.Core.Repositories.Interfaces;
-using Accounts.ModelBuilders;
 using Accounts.Models;
 using AutoMapper;
 
@@ -10,7 +9,6 @@ namespace Accounts.Controllers
 {
     public class UserController : Controller
     {
-
         private readonly IUserRepository _userRepository;
         private readonly IMapper _mapper;
 
@@ -20,21 +18,18 @@ namespace Accounts.Controllers
             _mapper = mapper;
         }
 
-        // GET: User
         public async Task<ActionResult> Index()
         {
             SelectListModel model = new SelectListModel { ListItems = new SelectList(await _userRepository.GetUsers(), "Value", "Text") };
             return View("Index", model);
         }
 
-        // GET: User
         public ActionResult Add()
         {
             var model = new UserModel();
             return View("Add", model);
         }
 
-        // GET: User
         [HttpPost]
         public async Task<ActionResult> Add(UserModel model)
         {
@@ -52,7 +47,6 @@ namespace Accounts.Controllers
             return View("Add", model);
         }
 
-        // GET: User
         public async Task<ActionResult> Update(Guid id)
         {
             var user = await _userRepository.GetUser(id);
@@ -67,7 +61,6 @@ namespace Accounts.Controllers
             return View("Update", buildViewModel);
         }
 
-        // GET: User
         [HttpPost]
         public async Task<ActionResult> Update(UserModel model)
         {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Accounts.Controllers;
@@ -17,7 +16,6 @@ using UserModel = Accounts.Core.Models.UserModel;
 
 namespace Tests
 {
-
     [TestFixture]
     public class HomeControllerTests
     {
@@ -28,7 +26,8 @@ namespace Tests
         private HomeController _homeController;
         private Guid _guid;
 
-        private void Setup()
+        [SetUp]
+        public void Setup()
         {
             _paymentRepositoryMock = new Mock<IPaymentRepository>();
             _userRepositoryMock = new Mock<IUserRepository>();
@@ -65,8 +64,6 @@ namespace Tests
         [Test]
         public async Task ShouldHaveIndexView()
         {
-            Setup();
-
             var viewResult = await _homeController.Index(It.IsAny<Guid>()) as ViewResult;
 
             Assert.AreEqual("Index", viewResult.ViewName);
@@ -75,19 +72,14 @@ namespace Tests
         [Test]
         public async Task ShouldHaveUserModel()
         {
-            Setup();
-
             var viewResult = await _homeController.Index(It.IsAny<Guid>()) as ViewResult;
 
             Assert.IsInstanceOf(typeof(HomeControllerModel), viewResult.Model);
         }
 
-
         [Test]
         public async Task ShouldHavePaymentViewModelWithValuesSet()
         {
-            Setup();
-
             var viewResult = await _homeController.GetPaymentSummaryById(_guid);
 
             var paymentViewModel = viewResult.Data as PaymentViewModel;
@@ -98,7 +90,6 @@ namespace Tests
         [Test]
         public async Task ShouldReturnGuidWhenAddingPayment()
         {
-            Setup();
             var viewResult = await _homeController.AddPayment(It.IsAny<Accounts.Models.PaymentModel>());
             var paymentViewModel = Guid.Parse(viewResult.Data.ToString());
 
@@ -108,7 +99,6 @@ namespace Tests
         [Test]
         public async Task ShouldReturnRowsAffectedWhenUpdatingPayment()
         {
-            Setup();
             var viewResult = await _homeController.UpdatePayment(It.IsAny<Accounts.Models.PaymentModel>());
             var paymentViewModel = int.Parse(viewResult.Data.ToString());
 
@@ -118,7 +108,6 @@ namespace Tests
         [Test]
         public async Task ShouldReturnRowsAffectedWhenDeletingPayment()
         {
-            Setup();
             var viewResult = await _homeController.DeletePayment(It.IsAny<Guid>());
             var paymentViewModel = int.Parse(viewResult.Data.ToString());
 

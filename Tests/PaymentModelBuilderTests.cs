@@ -12,7 +12,9 @@ namespace Tests
     {
         Mock<IPaymentHelper> _paymentHelperMock;
         private PaymentModelBuilder _builder;
-        private void Setup()
+
+        [SetUp]
+        public void Setup()
         {
             _paymentHelperMock = new Mock<IPaymentHelper>();
             _builder =new PaymentModelBuilder(_paymentHelperMock.Object);
@@ -22,10 +24,7 @@ namespace Tests
         [Test]
         public void Build_should_return_empty_list_when_reader_is_null()
         {
-            // given 
-            Setup();
-
-            // when
+            //given + when
             var paymentModels = _builder.Build(null);
 
             // then
@@ -35,8 +34,7 @@ namespace Tests
         [Test]
         public void Build_should_populate_core_list_model_when_reader_has_rows()
         {
-            // given 
-            Setup();
+            // given
             var dictionary = new Dictionary<string, object>
             {
                 {"Id", Guid.NewGuid()},

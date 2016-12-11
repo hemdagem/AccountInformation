@@ -24,7 +24,8 @@ namespace Tests
         private UserController userController;
         private Guid guid;
 
-        private void Setup()
+        [SetUp]
+        public void Setup()
         {
             userRepositoryMock = new Mock<IUserRepository>();
             _autoMapperMock = new Mock<IMapper>();
@@ -51,8 +52,6 @@ namespace Tests
         [Test]
         public async Task ShouldHaveIndexViewForIndexPage()
         {
-            Setup();
-
             var viewResult = await userController.Index() as ViewResult;
 
             Assert.AreEqual("Index", viewResult.ViewName);
@@ -61,8 +60,6 @@ namespace Tests
         [Test]
         public async Task ShouldHaveUserModelForIndexPage()
         {
-            Setup();
-
             var viewResult = await userController.Index() as ViewResult;
 
             Assert.IsInstanceOf(typeof(SelectListModel), viewResult.Model);
@@ -71,7 +68,6 @@ namespace Tests
         [Test]
         public async Task ShouldHaveSelectListModelWithValuesSetForIndexPage()
         {
-            Setup();
             var viewResult = await userController.Index() as ViewResult;
 
             var controllerModel = viewResult.Model as SelectListModel;
@@ -81,12 +77,9 @@ namespace Tests
             Assert.That(controllerModel.ListItems.First().Value, Is.EqualTo(guid.ToString()));
         }
 
-
         [Test]
         public void ShouldHaveAddViewForAddPage()
         {
-            Setup();
-
             var viewResult = userController.Add() as ViewResult;
 
             Assert.AreEqual("Add", viewResult.ViewName);
@@ -95,8 +88,6 @@ namespace Tests
         [Test]
         public void ShouldHaveUserModelForAddPage()
         {
-            Setup();
-
             var viewResult = userController.Add() as ViewResult;
 
             Assert.IsInstanceOf(typeof(Accounts.Models.UserModel), viewResult.Model);
@@ -105,12 +96,10 @@ namespace Tests
         [Test]
         public async Task ShouldNotCallUserRepositoryIfModelIsInvalid()
         {
-            Setup();
             userController.ModelState.AddModelError("test", "test");
             var actionResult = await userController.Add(new Accounts.Models.UserModel()) as ViewResult;
 
             userRepositoryMock.Verify(x => x.AddUser(It.IsAny<UserModel>()), Times.Never);
-
 
             Assert.IsInstanceOf(typeof(Accounts.Models.UserModel), actionResult.Model);
         }
@@ -118,8 +107,6 @@ namespace Tests
         [Test]
         public async Task ShouldCallUserRepositoryIfModelIsValid()
         {
-            Setup();
-
             await userController.Add(new Accounts.Models.UserModel());
 
             userRepositoryMock.Verify(x => x.AddUser(It.IsAny<UserModel>()), Times.Once);
@@ -128,20 +115,15 @@ namespace Tests
         [Test]
         public async Task ShouldRedirectToIndexPageIfUserAddedSuccessfully()
         {
-            Setup();
-
             RedirectToRouteResult result = await userController.Add(It.IsAny<Accounts.Models.UserModel>()) as RedirectToRouteResult;
 
             Assert.AreEqual("Index", result.RouteValues["Action"]);
             Assert.AreEqual("User", result.RouteValues["Controller"]);
         }
 
-
-
         [Test]
         public async Task ShouldHaveUpdateViewAndUserModelForUpdatePage()
         {
-            Setup();
             _autoMapperMock.Setup(x => x.Map<Accounts.Models.UserModel>(It.IsAny<UserModel>())).Returns(new Accounts.Models.UserModel());
             var viewResult = await userController.Update(guid) as ViewResult;
 
@@ -154,7 +136,6 @@ namespace Tests
         [ExpectedException(typeof(NullReferenceException))]
         public async Task ShouldThrowExceptionIfUserIsNotFoundOnTheUpdatePage()
         {
-            Setup();
             userRepositoryMock.Setup(x => x.UpdateUser(It.IsAny<UserModel>())).Returns(Task.FromResult(0));
             await userController.Update(It.IsAny<Guid>());
         }
@@ -162,19 +143,15 @@ namespace Tests
         [Test]
         public async Task ShouldRedirectToIndexPageIfUserUpdatedSuccessfully()
         {
-            Setup();
-
             RedirectToRouteResult result = await userController.Update(It.IsAny<Accounts.Models.UserModel>()) as RedirectToRouteResult;
 
             Assert.AreEqual("Index", result.RouteValues["Action"]);
             Assert.AreEqual("User", result.RouteValues["Controller"]);
         }
 
-
         [Test]
         public async Task ShouldNotCallUserRepositoryIfModelIsInvalidForUpdatePage()
         {
-            Setup();
             userController.ModelState.AddModelError("test", "test");
             var actionResult = await userController.Update(new Accounts.Models.UserModel()) as ViewResult;
 
@@ -186,12 +163,9 @@ namespace Tests
         [Test]
         public async Task ShouldCallUserRepositoryIfModelIsValidForUpdatePage()
         {
-            Setup();
-
             await userController.Update(new Accounts.Models.UserModel());
 
             userRepositoryMock.Verify(x => x.UpdateUser(It.IsAny<UserModel>()), Times.Once);
         }
-
     }
 }
