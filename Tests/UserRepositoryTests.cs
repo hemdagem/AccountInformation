@@ -92,11 +92,11 @@ namespace Tests
             var id = Guid.NewGuid();
             var model = new UserModel();
 
-            dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(id);
+            dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(id);
 
-            var paymentRepository = new UserRepository(dataAccessMock.Object);
+            var userRepository = new UserRepository(dataAccessMock.Object);
 
-            var updateUser = await paymentRepository.AddUser(model);
+            var updateUser = await userRepository.AddUser(model);
 
             Assert.That(updateUser, Is.EqualTo(id));
         }
