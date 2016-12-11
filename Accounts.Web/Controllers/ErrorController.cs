@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Accounts.Controllers
+namespace Accounts.Web.Controllers
 {
     public class ErrorController : Controller
     {

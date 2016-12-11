@@ -2,14 +2,14 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Accounts.Core.Repositories.Interfaces;
-using Accounts.ModelBuilders;
-using Accounts.Models;
+using Accounts.Web.ModelBuilders;
+using Accounts.Web.Models;
 using AutoMapper;
-using PaymentModel = Accounts.Models.PaymentModel;
-using PaymentViewModel = Accounts.Models.PaymentViewModel;
+using PaymentModel = Accounts.Web.Models.PaymentModel;
+using PaymentViewModel = Accounts.Web.Models.PaymentViewModel;
 
 
-namespace Accounts.Controllers
+namespace Accounts.Web.Controllers
 {
     public class HomeController : Controller
     {

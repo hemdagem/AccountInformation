@@ -2,10 +2,10 @@
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Accounts.Core.Repositories.Interfaces;
-using Accounts.Models;
+using Accounts.Web.Models;
 using AutoMapper;
 
-namespace Accounts.Controllers
+namespace Accounts.Web.Controllers
 {
     public class UserController : Controller
     {

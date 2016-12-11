@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Accounts.App_Start
+namespace Accounts.Web
 {
     public class FilterConfig
     {

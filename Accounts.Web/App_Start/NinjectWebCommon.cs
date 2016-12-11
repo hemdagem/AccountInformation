@@ -1,13 +1,13 @@
 using System;
 using System.Web;
-using Accounts;
 using Accounts.Core.Helpers;
 using Accounts.Core.Repositories;
 using Accounts.Core.Repositories.Interfaces;
 using Accounts.Database.DataAccess;
 using Accounts.Database.DataAccess.Interfaces;
-using Accounts.ModelBuilders;
-using Accounts.Models;
+using Accounts.Web;
+using Accounts.Web.ModelBuilders;
+using Accounts.Web.Models;
 using AutoMapper;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
 using Ninject;
@@ -17,7 +17,7 @@ using IPaymentModelBuilder = Accounts.Core.ModelBuilders.IPaymentModelBuilder;
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(NinjectWebCommon), "Stop")]
 
-namespace Accounts
+namespace Accounts.Web
 {
     public static class NinjectWebCommon 
     {

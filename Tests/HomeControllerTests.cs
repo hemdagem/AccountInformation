@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Web.Mvc;
-using Accounts.Controllers;
 using Accounts.Core.Repositories.Interfaces;
-using Accounts.ModelBuilders;
-using Accounts.Models;
+using Accounts.Web.Controllers;
+using Accounts.Web.ModelBuilders;
+using Accounts.Web.Models;
 using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using ListItem = Accounts.Core.Models.ListItem;
 using PaymentModel = Accounts.Core.Models.PaymentModel;
-using PaymentViewModel = Accounts.Models.PaymentViewModel;
+using PaymentViewModel = Accounts.Web.Models.PaymentViewModel;
 using UserModel = Accounts.Core.Models.UserModel;
 
 namespace Tests
@@ -54,9 +54,9 @@ namespace Tests
             _paymentRepositoryMock.Setup(x => x.UpdatePayment(It.IsAny<PaymentModel>())).Returns(Task.FromResult(1));
             _paymentRepositoryMock.Setup(x => x.DeletePayment(It.IsAny<Guid>())).Returns(Task.FromResult(1));
 
-            _paymentModelMock.Setup(x => x.CreatePayments(paymentModels)).Returns(new List<Accounts.Models.PaymentModel>());
+            _paymentModelMock.Setup(x => x.CreatePayments(paymentModels)).Returns(new List<Accounts.Web.Models.PaymentModel>());
 
-            _paymentModelMock.Setup(x => x.CreatePaymentSummary(It.IsAny<List<Accounts.Models.PaymentModel>>(),It.IsAny<Accounts.Models.UserModel>())).Returns(new PaymentViewModel());
+            _paymentModelMock.Setup(x => x.CreatePaymentSummary(It.IsAny<List<Accounts.Web.Models.PaymentModel>>(),It.IsAny<Accounts.Web.Models.UserModel>())).Returns(new PaymentViewModel());
 
             _homeController = new HomeController(_paymentRepositoryMock.Object, _userRepositoryMock.Object, _paymentModelMock.Object, _autoMapperMock.Object);
         }
@@ -90,7 +90,7 @@ namespace Tests
         [Test]
         public async Task ShouldReturnGuidWhenAddingPayment()
         {
-            var viewResult = await _homeController.AddPayment(It.IsAny<Accounts.Models.PaymentModel>());
+            var viewResult = await _homeController.AddPayment(It.IsAny<Accounts.Web.Models.PaymentModel>());
             var paymentViewModel = Guid.Parse(viewResult.Data.ToString());
 
             Assert.That(paymentViewModel, Is.Not.EqualTo(Guid.Empty));
@@ -99,7 +99,7 @@ namespace Tests
         [Test]
         public async Task ShouldReturnRowsAffectedWhenUpdatingPayment()
         {
-            var viewResult = await _homeController.UpdatePayment(It.IsAny<Accounts.Models.PaymentModel>());
+            var viewResult = await _homeController.UpdatePayment(It.IsAny<Accounts.Web.Models.PaymentModel>());
             var paymentViewModel = int.Parse(viewResult.Data.ToString());
 
             Assert.That(paymentViewModel, Is.Not.EqualTo(0));

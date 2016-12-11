@@ -1,4 +1,4 @@
-﻿using Accounts.Models;
+﻿using Accounts.Web.Models;
 using NUnit.Framework;
 
 namespace Tests

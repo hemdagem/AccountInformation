@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using Accounts.Models;
+using Accounts.Web.Models;
 
-namespace Accounts.ModelBuilders
+namespace Accounts.Web.ModelBuilders
 {
     public interface IPaymentModelFactory
     {

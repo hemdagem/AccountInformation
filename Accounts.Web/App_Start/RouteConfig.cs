@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using System.Web.Routing;
 
-namespace Accounts.App_Start
+namespace Accounts.Web
 {
     public class RouteConfig
     {

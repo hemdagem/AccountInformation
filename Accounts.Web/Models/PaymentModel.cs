@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Accounts.Models
+namespace Accounts.Web.Models
 {
     public class PaymentModel
     {

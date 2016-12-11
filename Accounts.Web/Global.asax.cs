@@ -1,8 +1,7 @@
 ﻿using System.Web.Mvc;
 using System.Web.Routing;
-using Accounts.App_Start;
 
-namespace Accounts
+namespace Accounts.Web
 {
     public class MvcApplication : System.Web.HttpApplication
     {

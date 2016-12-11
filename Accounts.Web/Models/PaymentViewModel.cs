@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Accounts.Models
+namespace Accounts.Web.Models
 {
     public class PaymentViewModel
     {

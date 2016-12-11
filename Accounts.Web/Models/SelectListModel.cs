@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Web.Mvc;
 
-namespace Accounts.Models
+namespace Accounts.Web.Models
 {
     public class SelectListModel
     {

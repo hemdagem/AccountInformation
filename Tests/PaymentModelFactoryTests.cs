@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using Accounts.Core.Helpers;
 using Accounts.Core.Models;
-using Accounts.ModelBuilders;
+using Accounts.Web.ModelBuilders;
 using Moq;
 using NUnit.Framework;
-using UserModel = Accounts.Models.UserModel;
+using UserModel = Accounts.Web.Models.UserModel;
 
 namespace Tests
 {
@@ -67,7 +67,7 @@ namespace Tests
             var paymentModelFactory = new PaymentModelFactory(paymentHelperMock.Object);
 
             // when
-            var payments = paymentModelFactory.CreatePaymentSummary(new List<Accounts.Models.PaymentModel>(), new UserModel());
+            var payments = paymentModelFactory.CreatePaymentSummary(new List<Accounts.Web.Models.PaymentModel>(), new UserModel());
 
             // then
             Assert.AreEqual(0,payments.Amount);

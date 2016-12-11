@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Accounts.Models
+namespace Accounts.Web.Models
 {
     public class UserModel
     {
