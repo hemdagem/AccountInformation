@@ -4,7 +4,7 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Web", "Accounts.Web\Accounts.Web.csproj", "{93983D10-5B67-4864-9C98-AB62388243EA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Tests", "Accounts.Tests\Accounts.Tests.csproj", "{65E81CFD-5117-44F6-AD90-7942DD4B821D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Tests.Unit", "Accounts.Tests\Accounts.Tests.Unit.csproj", "{65E81CFD-5117-44F6-AD90-7942DD4B821D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Core", "Accounts.Core\Accounts.Core.csproj", "{3669E60B-4767-42E0-8B40-35AB9B005C85}"
 EndProject
