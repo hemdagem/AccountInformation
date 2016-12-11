@@ -12,7 +12,7 @@ using NUnit.Framework;
 using ListItem = Accounts.Core.Models.ListItem;
 using UserModel = Accounts.Core.Models.UserModel;
 
-namespace Tests
+namespace Accounts.Tests.Unit.Accounts.Web.Controllers
 {
 
     [TestFixture]
@@ -89,24 +89,24 @@ namespace Tests
         {
             var viewResult = userController.Add() as ViewResult;
 
-            Assert.IsInstanceOf(typeof(Accounts.Web.Models.UserModel), viewResult.Model);
+            Assert.IsInstanceOf(typeof(global::Accounts.Web.Models.UserModel), viewResult.Model);
         }
 
         [Test]
         public async Task ShouldNotCallUserRepositoryIfModelIsInvalid()
         {
             userController.ModelState.AddModelError("test", "test");
-            var actionResult = await userController.Add(new Accounts.Web.Models.UserModel()) as ViewResult;
+            var actionResult = await userController.Add(new global::Accounts.Web.Models.UserModel()) as ViewResult;
 
             userRepositoryMock.Verify(x => x.AddUser(It.IsAny<UserModel>()), Times.Never);
 
-            Assert.IsInstanceOf(typeof(Accounts.Web.Models.UserModel), actionResult.Model);
+            Assert.IsInstanceOf(typeof(global::Accounts.Web.Models.UserModel), actionResult.Model);
         }
 
         [Test]
         public async Task ShouldCallUserRepositoryIfModelIsValid()
         {
-            await userController.Add(new Accounts.Web.Models.UserModel());
+            await userController.Add(new global::Accounts.Web.Models.UserModel());
 
             userRepositoryMock.Verify(x => x.AddUser(It.IsAny<UserModel>()), Times.Once);
         }
@@ -114,7 +114,7 @@ namespace Tests
         [Test]
         public async Task ShouldRedirectToIndexPageIfUserAddedSuccessfully()
         {
-            RedirectToRouteResult result = await userController.Add(It.IsAny<Accounts.Web.Models.UserModel>()) as RedirectToRouteResult;
+            RedirectToRouteResult result = await userController.Add(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToRouteResult;
 
             Assert.AreEqual("Index", result.RouteValues["Action"]);
             Assert.AreEqual("User", result.RouteValues["Controller"]);
@@ -123,11 +123,11 @@ namespace Tests
         [Test]
         public async Task ShouldHaveUpdateViewAndUserModelForUpdatePage()
         {
-            _autoMapperMock.Setup(x => x.Map<Accounts.Web.Models.UserModel>(It.IsAny<UserModel>())).Returns(new Accounts.Web.Models.UserModel());
+            _autoMapperMock.Setup(x => x.Map<global::Accounts.Web.Models.UserModel>(It.IsAny<UserModel>())).Returns(new global::Accounts.Web.Models.UserModel());
             var viewResult = await userController.Update(guid) as ViewResult;
 
             Assert.AreEqual("Update", viewResult.ViewName);
-            Assert.IsInstanceOf(typeof(Accounts.Web.Models.UserModel), viewResult.Model);
+            Assert.IsInstanceOf(typeof(global::Accounts.Web.Models.UserModel), viewResult.Model);
 
         }
 
@@ -142,7 +142,7 @@ namespace Tests
         [Test]
         public async Task ShouldRedirectToIndexPageIfUserUpdatedSuccessfully()
         {
-            RedirectToRouteResult result = await userController.Update(It.IsAny<Accounts.Web.Models.UserModel>()) as RedirectToRouteResult;
+            RedirectToRouteResult result = await userController.Update(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToRouteResult;
 
             Assert.AreEqual("Index", result.RouteValues["Action"]);
             Assert.AreEqual("User", result.RouteValues["Controller"]);
@@ -152,17 +152,17 @@ namespace Tests
         public async Task ShouldNotCallUserRepositoryIfModelIsInvalidForUpdatePage()
         {
             userController.ModelState.AddModelError("test", "test");
-            var actionResult = await userController.Update(new Accounts.Web.Models.UserModel()) as ViewResult;
+            var actionResult = await userController.Update(new global::Accounts.Web.Models.UserModel()) as ViewResult;
 
             userRepositoryMock.Verify(x => x.UpdateUser(It.IsAny<UserModel>()), Times.Never);
 
-            Assert.IsInstanceOf(typeof(Accounts.Web.Models.UserModel), actionResult.Model);
+            Assert.IsInstanceOf(typeof(global::Accounts.Web.Models.UserModel), actionResult.Model);
         }
 
         [Test]
         public async Task ShouldCallUserRepositoryIfModelIsValidForUpdatePage()
         {
-            await userController.Update(new Accounts.Web.Models.UserModel());
+            await userController.Update(new global::Accounts.Web.Models.UserModel());
 
             userRepositoryMock.Verify(x => x.UpdateUser(It.IsAny<UserModel>()), Times.Once);
         }

@@ -1,7 +1,7 @@
 ﻿using Accounts.Web.Models;
 using NUnit.Framework;
 
-namespace Tests
+namespace Accounts.Tests.Unit.Accounts.Web.Models
 {
     [TestFixture]
     public class PaymentViewModelTests

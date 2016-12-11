@@ -3,7 +3,7 @@ using Accounts.Core.Helpers;
 using Moq;
 using NUnit.Framework;
 
-namespace Tests
+namespace Accounts.Tests.Unit.Accounts.Core.Helpers
 {
     [TestFixture]
     public class PaymentHelperTests

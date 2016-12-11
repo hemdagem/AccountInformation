@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
 using System.Threading.Tasks;
 using Accounts.Core.ModelBuilders;
 using Accounts.Core.Models;
 using Accounts.Core.Repositories;
 using Accounts.Database.DataAccess.Interfaces;
+using Accounts.Tests.Unit.TestHelpers;
 using Moq;
 using NUnit.Framework;
 
-namespace Tests
+namespace Accounts.Tests.Unit.Accounts.Core.Repositories
 {
     [TestFixture]
     public class PaymentRepositoryTests

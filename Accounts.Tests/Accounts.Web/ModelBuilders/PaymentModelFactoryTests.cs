@@ -8,7 +8,7 @@ using Moq;
 using NUnit.Framework;
 using UserModel = Accounts.Web.Models.UserModel;
 
-namespace Tests
+namespace Accounts.Tests.Unit.Accounts.Web.ModelBuilders
 {
     [TestFixture]
     public class PaymentModelFactoryTests
@@ -67,7 +67,7 @@ namespace Tests
             var paymentModelFactory = new PaymentModelFactory(paymentHelperMock.Object);
 
             // when
-            var payments = paymentModelFactory.CreatePaymentSummary(new List<Accounts.Web.Models.PaymentModel>(), new UserModel());
+            var payments = paymentModelFactory.CreatePaymentSummary(new List<global::Accounts.Web.Models.PaymentModel>(), new UserModel());
 
             // then
             Assert.AreEqual(0,payments.Amount);

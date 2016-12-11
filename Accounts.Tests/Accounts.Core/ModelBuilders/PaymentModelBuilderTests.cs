@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using Accounts.Core.Helpers;
 using Accounts.Core.ModelBuilders;
+using Accounts.Tests.Unit.TestHelpers;
 using Moq;
 using NUnit.Framework;
 
-namespace Tests
+namespace Accounts.Tests.Unit.Accounts.Core.ModelBuilders
 {
     [TestFixture]
     public class PaymentModelBuilderTests

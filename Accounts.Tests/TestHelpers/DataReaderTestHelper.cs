@@ -2,7 +2,7 @@
 using System.Data;
 using Moq;
 
-namespace Tests
+namespace Accounts.Tests.Unit.TestHelpers
 {
     public static class DataReaderTestHelper
     {
