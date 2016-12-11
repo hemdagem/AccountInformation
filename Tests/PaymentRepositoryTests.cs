@@ -107,7 +107,7 @@ namespace Tests
             //given
             Setup();
             _dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddPayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(),
-                It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(_guid));
+                It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(_guid));
 
             //when
             var paymentsById = await _paymentRepository.AddPayment(_paymentModel);
@@ -157,7 +157,7 @@ namespace Tests
         {
             //given
             Setup();
-            _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdatePayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
+            _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdatePayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var updatePayment = await _paymentRepository.UpdatePayment(_paymentModel);
 
