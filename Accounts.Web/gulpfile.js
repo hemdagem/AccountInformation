@@ -15,5 +15,5 @@ gulp.task('default', function() {
   return gulp.src(destination +'*.css')
     .pipe(minifyCSS())
     .pipe(concat('style.min.css')) 
-    .pipe(gulp.dest(destination));
+    .pipe(gulp.dest(destination+ 'compiled'));
 });

@@ -19,7 +19,7 @@ namespace Accounts.Core.Repositories
 
         public async Task<List<ListItem>> GetUsers()
         {
-            var reader =  await _dataAccess.ExecuteReader("up_GetUsers");
+            var reader = await _dataAccess.ExecuteReader("up_GetUsers");
             var items = new List<ListItem>();
 
             while (reader.Read())
@@ -49,7 +49,7 @@ namespace Accounts.Core.Repositories
             var amountParameter = new SqlParameter("Amount", model.Amount);
             var payDayParameter = new SqlParameter("PayDay", model.PayDay);
 
-            return await  _dataAccess.ExecuteScalar<int>("up_UpdateUser", userIdParameter, nameParameter, amountParameter, payDayParameter);
+            return await _dataAccess.ExecuteScalar<int>("up_UpdateUser", userIdParameter, nameParameter, amountParameter, payDayParameter);
         }
 
         public async Task<UserModel> GetUser(Guid id)
@@ -57,14 +57,14 @@ namespace Accounts.Core.Repositories
             UserModel model = new UserModel();
             var userIdParameter = new SqlParameter("Id", id);
 
-            var reader =  await _dataAccess.ExecuteReader("up_GetUser", userIdParameter);
+            var reader = await _dataAccess.ExecuteReader("up_GetUser", userIdParameter);
 
             while (reader.Read())
             {
                 model.Amount = decimal.Parse(reader["Amount"].ToString());
-                model.Id = (Guid) reader["Id"];
-                model.Name =reader["Name"].ToString();
-                model.PayDay = (int) reader["PayDay"];
+                model.Id = (Guid)reader["Id"];
+                model.Name = reader["Name"].ToString();
+                model.PayDay = (int)reader["PayDay"];
             }
 
             return model;
