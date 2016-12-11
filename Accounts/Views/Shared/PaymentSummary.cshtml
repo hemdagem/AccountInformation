@@ -1,0 +1,24 @@
+﻿<div class="row">
+    <div class="col-md-12">
+        <table class="table table-condensed table-bordered">
+            <thead>
+                <tr>
+                    <th>Monthly Amount</th>
+                    <th>Amount remaining this month </th>
+                    <th>Amount to save for yearly Amount</th>
+                    <th>Remaining Amount to pay this month </th>
+                    <th>Amount to pay this month </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center"><h4><span class="label label-success" data-bind="text: '£'+ Amount()"></span></h4></td>
+                    <td class="text-center"><h4><span class="label label-success" data-bind="text: '£'+ RemainingEachMonth()"></span></h4></td>
+                    <td class="text-center"><h4><span class="label label-warning" data-bind="text: '£'+ YearlyAmountEachMonth()"></span></h4></td>
+                    <td class="text-center"><h4><span class="label label-danger" data-bind="text: '£'+ CurrentAmountToPayThisMonth()"></span></h4></td>
+                    <td class="text-center"><h4><span class="label label-danger" data-bind="text: '£'+ TotalAmountToPayThisMonth()"></span></h4></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
