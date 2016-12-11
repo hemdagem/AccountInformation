@@ -46,12 +46,11 @@ namespace Tests
                 }
             };
 
-            var paymentModels = new List<PaymentModel> { new PaymentModel { Amount = 4, Id = _guid, PaidYearly = true, Paid = true, Date = DateTime.Today, PaymentTypeId = _guid, Title = "Title" } };
+            var paymentModels = new List<PaymentModel> { new PaymentModel { Amount = 4, Id = _guid, PaidYearly = true, Paid = true, Date = DateTime.Today, Title = "Title" } };
 
             _userModelBuilderMock.Setup(x => x.BuildViewModel(It.IsAny<UserModel>())).Returns(new Accounts.Models.UserModel());
             _userRepositoryMock.Setup(x => x.GetUsers()).Returns(Task.FromResult(items));
             _userRepositoryMock.Setup(x => x.GetUser(It.IsAny<Guid>())).Returns(Task.FromResult(new UserModel()));
-            _paymentRepositoryMock.Setup(x => x.GetPaymentTypes()).Returns(Task.FromResult(items));
 
             _paymentRepositoryMock.Setup(x => x.GetPaymentsById(_guid)).Returns(Task.FromResult(paymentModels));
             _paymentRepositoryMock.Setup(x => x.AddPayment(It.IsAny<PaymentModel>())).Returns(Task.FromResult(_guid));
@@ -85,19 +84,6 @@ namespace Tests
             Assert.IsInstanceOf(typeof(HomeControllerModel), viewResult.Model);
         }
 
-        [Test]
-        public async Task ShouldHaveSelectListModelWithValuesSet()
-        {
-            Setup();
-            var viewResult = await _homeController.Index(_guid) as ViewResult;
-
-            var controllerModel = viewResult.Model as HomeControllerModel;
-
-            Assert.That(controllerModel.Users, Is.EqualTo(_guid));
-            Assert.That(controllerModel.PaymentTypes.ListItems.Count(), Is.EqualTo(1));
-            Assert.That(controllerModel.PaymentTypes.ListItems.First().Text, Is.EqualTo("Test"));
-            Assert.That(controllerModel.PaymentTypes.ListItems.First().Value, Is.EqualTo(_guid.ToString()));
-        }
 
         [Test]
         public async Task ShouldHavePaymentViewModelWithValuesSet()

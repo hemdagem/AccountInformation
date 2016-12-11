@@ -76,7 +76,7 @@ namespace Tests
 
             var model = new UserModel();
 
-            dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdateUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(rowsAffected);
+            dataAccessMock.Setup(x =>  x.ExecuteScalar<int>("up_UpdateUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var paymentRepository = new UserRepository(dataAccessMock.Object);
 
@@ -92,7 +92,7 @@ namespace Tests
             var id = Guid.NewGuid();
             var model = new UserModel();
 
-            dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(id);
+            dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(id));
 
             var userRepository = new UserRepository(dataAccessMock.Object);
 

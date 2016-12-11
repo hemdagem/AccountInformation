@@ -11,6 +11,5 @@ namespace Accounts.Core.Repositories.Interfaces
         Task<Guid> AddPayment(PaymentModel model);
         Task<int> DeletePayment(Guid guid);
         Task<int> UpdatePayment(PaymentModel model);
-        Task<List<ListItem>> GetPaymentTypes();
     }
 }

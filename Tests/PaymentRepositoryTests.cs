@@ -38,7 +38,6 @@ namespace Tests
                     PaidYearly = true,
                     Paid = true,
                     Date = DateTime.Today,
-                    PaymentTypeId = Guid.NewGuid(),
                     Title = "Title"
                 }
             };
@@ -48,9 +47,7 @@ namespace Tests
                 Amount = 20,
                 Date = DateTime.UtcNow,
                 IncomeId = Guid.NewGuid(),
-                PaidYearly = true,
-                PaymentTypeId = Guid.NewGuid()
-
+                PaidYearly = true
             };
 
             _paymentRepository = new PaymentRepository(_dataAccessMock.Object, _paymentModelBuilderMock.Object);
@@ -69,7 +66,6 @@ namespace Tests
                 {"Amount", 28},
                 {"PaidYearly", true},
                 {"Paid", true},
-                {"PaymentTypeId", _guid},
                 {"Date", DateTime.Today},
                 {"Recurring", true},
                 {"PayDay", 6}
@@ -88,7 +84,6 @@ namespace Tests
             Assert.That(paymentsById[0].PaidYearly, Is.EqualTo(_paymentModelList[0].PaidYearly));
             Assert.That(paymentsById[0].Paid, Is.EqualTo(_paymentModelList[0].Paid));
             Assert.That(paymentsById[0].Date, Is.EqualTo(_paymentModelList[0].Date));
-            Assert.That(paymentsById[0].PaymentTypeId, Is.EqualTo(_paymentModelList[0].PaymentTypeId));
             Assert.That(paymentsById[0].Title, Is.EqualTo(_paymentModelList[0].Title));
         }
 
@@ -112,7 +107,7 @@ namespace Tests
             //given
             Setup();
             _dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddPayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(),
-                It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(_guid);
+                It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(_guid));
 
             //when
             var paymentsById = await _paymentRepository.AddPayment(_paymentModel);
@@ -134,32 +129,12 @@ namespace Tests
             var paidYearlySqlParameter = new SqlParameter("Amount", _paymentModel.Date);
             var paymentTypeSqlParameter = new SqlParameter("Amount", _paymentModel.Date);
 
-            _dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddPayment", guidSqlParameter, amountSqlParameter, dateSqlParameter, paidYearlySqlParameter, paymentTypeSqlParameter)).Returns(Guid.Empty);
+            _dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddPayment", guidSqlParameter, amountSqlParameter, dateSqlParameter, paidYearlySqlParameter, paymentTypeSqlParameter)).Returns(Task.FromResult(Guid.Empty));
 
             //when
             await _paymentRepository.AddPayment(_paymentModel);
         }
 
-
-        [Test]
-        public async Task ShouldGetPaymentTypes()
-        {
-            //given
-            Setup();
-            var dictionary = new Dictionary<string, object>
-            {
-                {"Id", Guid.NewGuid().ToString()},
-                {"Title", "Test"}
-            };
-
-            _dataAccessMock.Setup(x => x.ExecuteReader("up_GetPaymentTypes")).Returns(Task.FromResult(DataReaderTestHelper.Reader(dictionary)));
-
-            var paymentTypes = await _paymentRepository.GetPaymentTypes();
-
-            Assert.That(paymentTypes.Count(), Is.EqualTo(1));
-            Assert.That(paymentTypes.First().Value, Is.EqualTo(dictionary["Id"]));
-            Assert.That(paymentTypes.First().Text, Is.EqualTo(dictionary["Title"]));
-        }
 
         [Test]
         [TestCase(1)]
@@ -168,7 +143,7 @@ namespace Tests
         {
             //given
             Setup();
-            _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_DeletePayment", It.IsAny<SqlParameter>())).Returns(rowsAffected);
+            _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_DeletePayment", It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var deletePayment = await _paymentRepository.DeletePayment(_guid);
 
@@ -182,7 +157,7 @@ namespace Tests
         {
             //given
             Setup();
-            _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdatePayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(rowsAffected);
+            _dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdatePayment", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var updatePayment = await _paymentRepository.UpdatePayment(_paymentModel);
 

@@ -32,7 +32,6 @@ namespace Accounts.ModelBuilders
                     Title = paymentModel.Title,
                     Amount = paymentModel.Amount,
                     PaidYearly = paymentModel.PaidYearly,
-                    PaymentTypeId = paymentModel.PaymentTypeId,
                     Recurring = paymentModel.Recurring,
                     Date =paymentModel.Date,
                     Paid = paymentModel.Paid

@@ -13,7 +13,7 @@ function PaymentViewModel() {
     self.AmountToAdd = ko.observable(0);
     self.PaidYearly = ko.observable();
     self.Recurring = ko.observable();
-    self.PaymentTypeId = ko.observable(0);
+    self.Title = ko.observable(0);
     self.Date = ko.observable();
     self.Recurring = ko.observable();
 
@@ -23,7 +23,7 @@ function PaymentViewModel() {
             IncomeId: user.val(),
             Amount: self.AmountToAdd(),
             PaidYearly: self.PaidYearly(),
-            PaymentTypeId: self.PaymentTypeId(),
+            Title: self.Title(),
             Date: self.Date(),
             Recurring: self.Recurring()
         };
@@ -40,7 +40,7 @@ function PaymentViewModel() {
                 var today = getDate(new Date());
 
                 self.Date(today.fullDate);
-                self.PaymentTypeId($('#paymentTypes').find("option:first-child").val());
+                self.Title("");
 
                 $(".alert").show();
                 $(".addPaymentLink").click();
@@ -126,7 +126,7 @@ function PaymentViewModel() {
 
         this.Day = ko.observable(currentDay.day);
         this.Date = ko.observable(currentDay.fullDate);
-        this.PaymentTypeId = ko.observable(data.PaymentTypeId);
+        this.Title = ko.observable(data.Title);
         var paid = this.Paid;
         this.alreadyPaid = ko.pureComputed(function () {
             return paid() === true ? "success" : "danger";
@@ -151,7 +151,7 @@ function PaymentViewModel() {
                 Id: currentData.PaymentId(),
                 Amount: currentData.Amount(),
                 PaidYearly: currentData.PaidYearly(),
-                PaymentTypeId: currentData.PaymentTypeId(),
+                Title: currentData.Title(),
                 Date: currentData.Date(),
                 Recurring: currentData.Recurring()
             };

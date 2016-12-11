@@ -15,7 +15,6 @@ namespace Accounts.ModelBuilders
                 Paid = model.Paid,
                 PaidYearly = model.PaidYearly,
                 PayDay = model.PayDay,
-                PaymentTypeId = model.PaymentTypeId,
                 Recurring = model.Recurring,
                 Title = model.Title,
             };
@@ -32,7 +31,6 @@ namespace Accounts.ModelBuilders
                 Paid = model.Paid,
                 PaidYearly = model.PaidYearly,
                 PayDay = model.PayDay,
-                PaymentTypeId = model.PaymentTypeId,
                 Recurring = model.Recurring,
                 Title = model.Title,
             };

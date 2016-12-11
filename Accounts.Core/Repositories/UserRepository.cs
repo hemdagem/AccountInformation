@@ -39,8 +39,7 @@ namespace Accounts.Core.Repositories
             var amountParameter = new SqlParameter("Amount", model.Amount);
             var payDayParameter = new SqlParameter("PayDay", model.PayDay);
 
-            var task = _dataAccess.ExecuteScalar<Guid>("up_AddUser", nameParameter, amountParameter, payDayParameter);
-            return task;
+            return await _dataAccess.ExecuteScalar<Guid>("up_AddUser", nameParameter, amountParameter, payDayParameter);
         }
 
         public async Task<int> UpdateUser(UserModel model)
@@ -50,8 +49,7 @@ namespace Accounts.Core.Repositories
             var amountParameter = new SqlParameter("Amount", model.Amount);
             var payDayParameter = new SqlParameter("PayDay", model.PayDay);
 
-            var task = _dataAccess.ExecuteScalar<int>("up_UpdateUser", userIdParameter, nameParameter, amountParameter, payDayParameter);
-            return task;
+            return await  _dataAccess.ExecuteScalar<int>("up_UpdateUser", userIdParameter, nameParameter, amountParameter, payDayParameter);
         }
 
         public async Task<UserModel> GetUser(Guid id)

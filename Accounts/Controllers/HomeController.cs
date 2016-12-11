@@ -35,21 +35,13 @@ namespace Accounts.Controllers
                 Users = id
             };
 
-            var userModel = _userRepository.GetUser(id);
-            var paymentTypes = _paymentRepository.GetPaymentTypes();
-
-            await Task.WhenAll(userModel, paymentTypes);
+            var userModel = await  _userRepository.GetUser(id);
 
             if (userModel == null)
             {
                 return RedirectToAction("Index", "Error");
             }
-
-            homeControllerModel.PaymentTypes = new SelectListModel
-            {
-                ListItems = new SelectList(paymentTypes.Result, "Value", "Text")
-            };
-
+            
             return View("Index", homeControllerModel);
         }
 

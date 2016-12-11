@@ -44,9 +44,8 @@ namespace Accounts.Core.Repositories
             var dateParameter = new SqlParameter("Date", model.Date);
             var paidYearlyParameter = new SqlParameter("PaidYearly", model.PaidYearly);
             var recurringParameter = new SqlParameter("Recurring", model.Recurring);
-            var paymentTypeIdParameter = new SqlParameter("PaymentTypeId", model.PaymentTypeId);
 
-            var paymentList = _dataAccess.ExecuteScalar<Guid>("up_AddPayment", idParameter, amountParameter, dateParameter, paidYearlyParameter, paymentTypeIdParameter, recurringParameter);
+            var paymentList = await  _dataAccess.ExecuteScalar<Guid>("up_AddPayment", idParameter, amountParameter, dateParameter, paidYearlyParameter, recurringParameter);
 
             if (paymentList == Guid.Empty)
             {
@@ -62,34 +61,14 @@ namespace Accounts.Core.Repositories
             var amountParameter = new SqlParameter("Amount", model.Amount);
             var dateParameter = new SqlParameter("Date", model.Date);
             var paidYearlyParameter = new SqlParameter("PaidYearly", model.PaidYearly);
-            var paymentTypeIdParameter = new SqlParameter("PaymentTypeId", model.PaymentTypeId);
             var recurringParameter = new SqlParameter("Recurring", model.Recurring);
 
-            return _dataAccess.ExecuteScalar<int>("up_UpdatePayment", amountParameter, dateParameter, paidYearlyParameter, paymentTypeIdParameter, idParameter, recurringParameter);
+            return await _dataAccess.ExecuteScalar<int>("up_UpdatePayment", amountParameter, dateParameter, paidYearlyParameter, idParameter, recurringParameter);
         }
 
         public async Task<int> DeletePayment(Guid guid)
         {
-            return _dataAccess.ExecuteScalar<int>("up_DeletePayment", new SqlParameter("PaymentId", guid));
+            return await _dataAccess.ExecuteScalar<int>("up_DeletePayment", new SqlParameter("PaymentId", guid));
         }
-
-        public async Task<List<ListItem>> GetPaymentTypes()
-        {
-            var paymentTypes =  await _dataAccess.ExecuteReader("up_GetPaymentTypes");
-            var items = new List<ListItem>();
-
-            while (paymentTypes.Read())
-            {
-                items.Add(new ListItem
-                {
-                    Text = paymentTypes["Title"].ToString(),
-                    Value = paymentTypes["Id"].ToString()
-                });
-            }
-
-            return items;
-        }
-
-
     }
 }

@@ -8,6 +8,6 @@ namespace Accounts.Database.DataAccess.Interfaces
     {
         Task<IDataReader> ExecuteReader(string storedProcedure, params SqlParameter[] parameters);
         Task<int> ExecuteNonQuery(string storedProcedure, params SqlParameter[] parameters);
-        T ExecuteScalar<T>(string storedProcedure, params SqlParameter[] parameters);
+        Task<T> ExecuteScalar<T>(string storedProcedure, params SqlParameter[] parameters);
     }
 }

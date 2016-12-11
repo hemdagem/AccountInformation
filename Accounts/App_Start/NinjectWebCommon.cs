@@ -75,7 +75,6 @@ namespace Accounts
 
             kernel.Bind<IPaymentRepository>().To<PaymentRepository>();
             kernel.Bind<IUserRepository>().To<UserRepository>();
-            kernel.Bind<IPaymentTypeRepository>().To<PaymentTypeRepository>();
             kernel.Bind<IDbConnectionFactory>().To<SqlConnectionFactory>();
             kernel.Bind<IPaymentModelFactory>().To<PaymentModelFactory>();
             kernel.Bind<IPaymentHelper>().To<PaymentHelper>();

@@ -130,7 +130,6 @@
     <Compile Include="ModelBuilders\IPaymentTypeModelBuilder.cs" />
     <Compile Include="ModelBuilders\IUserModelBuilder.cs" />
     <Compile Include="ModelBuilders\PaymentModelBuilder.cs" />
-    <Compile Include="Controllers\PaymentTypeController.cs" />
     <Compile Include="ModelBuilders\PaymentTypeModelBuilder.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
@@ -180,9 +179,6 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\User\Add.cshtml" />
     <Content Include="Views\User\Update.cshtml" />
-    <Content Include="Views\PaymentType\Add.cshtml" />
-    <Content Include="Views\PaymentType\Index.cshtml" />
-    <Content Include="Views\PaymentType\Update.cshtml" />
     <Content Include="Views\Shared\AddPayment.cshtml" />
     <Content Include="Views\Shared\PaymentSummary.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />

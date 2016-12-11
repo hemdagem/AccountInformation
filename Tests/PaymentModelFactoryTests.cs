@@ -42,13 +42,12 @@ namespace Tests
                 {"Title", "Mobile"},
                 {"Amount", 20.00},
                 {"PaidYearly", true},
-                {"PaymentTypeId", Id},
                 {"Recurring", true},
                 {"PayDay", 6},
                 {"Date", DateTime.Today}
             };
             // when
-            var payments = paymentModelFactory.CreatePayments(new List<PaymentModel> { new PaymentModel { Id = Id, Title = "Mobile", Amount = 20.00M, PaidYearly = true, PaymentTypeId = Id, Recurring = true, PayDay = 6, Date = DateTime.Today } });
+            var payments = paymentModelFactory.CreatePayments(new List<PaymentModel> { new PaymentModel { Id = Id, Title = "Mobile", Amount = 20.00M, PaidYearly = true, Recurring = true, PayDay = 6, Date = DateTime.Today } });
 
             // then
             Assert.That(payments.Count, Is.EqualTo(1));
@@ -56,7 +55,6 @@ namespace Tests
             Assert.AreEqual(dictionary["Title"], payments[0].Title);
             Assert.AreEqual(dictionary["Amount"], payments[0].Amount);
             Assert.AreEqual(dictionary["PaidYearly"], payments[0].PaidYearly);
-            Assert.AreEqual(dictionary["PaymentTypeId"], payments[0].PaymentTypeId);
             Assert.AreEqual(dictionary["Recurring"], payments[0].Recurring);
             Assert.AreEqual(dictionary["PayDay"], 6);
         }

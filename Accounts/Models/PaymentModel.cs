@@ -9,7 +9,6 @@ namespace Accounts.Models
         public bool PaidYearly { get; set; }
         public bool Paid { get; set; }
         public DateTime Date { get; set; }
-        public Guid PaymentTypeId { get; set; }
         public Guid IncomeId { get; set; }
         public bool Recurring { get; set; }
         public string Title { get; set; }

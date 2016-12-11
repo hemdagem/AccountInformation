@@ -108,9 +108,7 @@
     <Compile Include="PaymentHelperTests.cs" />
     <Compile Include="PaymentModelBuilderTests.cs" />
     <Compile Include="PaymentModelFactoryTests.cs" />
-    <Compile Include="PaymentTypeControllerTests.cs" />
     <Compile Include="UserControllerTests.cs" />
-    <Compile Include="PaymentTypeRepositoryTests.cs" />
     <Compile Include="UserRepositoryTests.cs" />
     <Compile Include="HomeControllerTests.cs" />
     <Compile Include="PaymentRepositoryTests.cs" />

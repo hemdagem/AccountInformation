@@ -50,12 +50,12 @@ namespace Accounts.Database.DataAccess
         }
 
 
-        public T ExecuteScalar<T>(string storedProcedure, params SqlParameter[] parameters)
+        public async Task<T> ExecuteScalar<T>(string storedProcedure, params SqlParameter[] parameters)
         {
             try
             {
                 SqlCommand command = CreateNewCommand(storedProcedure, parameters);
-                return (T)Convert.ChangeType(command.ExecuteScalar(),typeof(T));
+                return (T)Convert.ChangeType( await command.ExecuteScalarAsync(),typeof(T));
             }
             catch (Exception ex)
             {

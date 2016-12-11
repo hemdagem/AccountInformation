@@ -48,9 +48,9 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-xs-2 control-label">Type</label>
+                            <label class="col-xs-2 control-label">Payment Title</label>
                             <div class="col-xs-10">
-                                @Html.DropDownListFor(m => m.SelectedItem, Model.ListItems, new { id = "paymentTypes", @class = "form-control", data_bind = "value: PaymentTypeId" })
+                                <input type="text" id="title" data-bind="checked: Title">
                             </div>
                         </div>
                         <div class="form-group">

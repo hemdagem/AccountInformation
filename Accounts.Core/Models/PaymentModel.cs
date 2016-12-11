@@ -8,7 +8,6 @@ namespace Accounts.Core.Models
         public decimal Amount { get; set; }
         public DateTime Date { get; set; }
         public bool PaidYearly { get; set; }
-        public Guid PaymentTypeId { get; set; }
         public bool Recurring { get; set; }
         public Guid IncomeId { get; set; }
         public string Title { get; set; }

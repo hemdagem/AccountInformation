@@ -43,7 +43,6 @@ namespace Tests
                 {"Title", "Mobile"},
                 {"Amount", 20.00},
                 {"PaidYearly", true},
-                {"PaymentTypeId", Guid.NewGuid()},
                 {"Recurring", true},
                 {"PayDay", 6},
                 {"Date", DateTime.Today}

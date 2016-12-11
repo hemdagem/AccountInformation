@@ -34,8 +34,7 @@
 <script type="text/html" id="edit-template">
     <tr data-bind="css: alreadyPaid">
         <td>
-            @Html.DropDownListFor(m => m.PaymentTypes.SelectedItem, Model.PaymentTypes.ListItems, new { id = "user", @class = "form-control", data_bind = "value: PaymentTypeId" })
-
+            <input type="text" id="title" data-bind="value: Title"/>
             <div class="checkbox">
                 <label>
                     <input type="checkbox" id="paidYearly" data-bind="checked: Recurring"> Recurring
