@@ -7,6 +7,7 @@ using Accounts.Controllers;
 using Accounts.Core.Repositories.Interfaces;
 using Accounts.ModelBuilders;
 using Accounts.Models;
+using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using ListItem = Accounts.Core.Models.ListItem;
@@ -19,14 +20,14 @@ namespace Tests
     public class UserControllerTests
     {
         private Mock<IUserRepository> userRepositoryMock;
-        private Mock<IUserModelBuilder> userModelBuilderMock;
+        private Mock<IMapper> _autoMapperMock;
         private UserController userController;
         private Guid guid;
 
         private void Setup()
         {
             userRepositoryMock = new Mock<IUserRepository>();
-            userModelBuilderMock = new Mock<IUserModelBuilder>();
+            _autoMapperMock = new Mock<IMapper>();
             guid = Guid.NewGuid();
 
             var items = new List<ListItem>
@@ -44,7 +45,7 @@ namespace Tests
             userRepositoryMock.Setup(x => x.AddUser(It.IsAny<UserModel>())).Returns(Task.FromResult(guid));
             userRepositoryMock.Setup(x => x.UpdateUser(It.IsAny<UserModel>())).Returns(Task.FromResult(1));
 
-            userController = new UserController(userRepositoryMock.Object, userModelBuilderMock.Object);
+            userController = new UserController(userRepositoryMock.Object, _autoMapperMock.Object);
         }
 
         [Test]
@@ -141,7 +142,7 @@ namespace Tests
         public async Task ShouldHaveUpdateViewAndUserModelForUpdatePage()
         {
             Setup();
-            userModelBuilderMock.Setup(x => x.BuildViewModel(It.IsAny<UserModel>())).Returns(new Accounts.Models.UserModel());
+            _autoMapperMock.Setup(x => x.Map<Accounts.Models.UserModel>(It.IsAny<UserModel>())).Returns(new Accounts.Models.UserModel());
             var viewResult = await userController.Update(guid) as ViewResult;
 
             Assert.AreEqual("Update", viewResult.ViewName);
@@ -157,8 +158,6 @@ namespace Tests
             userRepositoryMock.Setup(x => x.UpdateUser(It.IsAny<UserModel>())).Returns(Task.FromResult(0));
             await userController.Update(It.IsAny<Guid>());
         }
-
-
 
         [Test]
         public async Task ShouldRedirectToIndexPageIfUserUpdatedSuccessfully()
@@ -181,7 +180,6 @@ namespace Tests
 
             userRepositoryMock.Verify(x => x.UpdateUser(It.IsAny<UserModel>()), Times.Never);
 
-
             Assert.IsInstanceOf(typeof(Accounts.Models.UserModel), actionResult.Model);
         }
 
@@ -194,7 +192,6 @@ namespace Tests
 
             userRepositoryMock.Verify(x => x.UpdateUser(It.IsAny<UserModel>()), Times.Once);
         }
-
 
     }
 }

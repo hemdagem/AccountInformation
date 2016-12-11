@@ -7,6 +7,7 @@ using Accounts.Controllers;
 using Accounts.Core.Repositories.Interfaces;
 using Accounts.ModelBuilders;
 using Accounts.Models;
+using AutoMapper;
 using Moq;
 using NUnit.Framework;
 using ListItem = Accounts.Core.Models.ListItem;
@@ -23,8 +24,7 @@ namespace Tests
         private Mock<IPaymentRepository> _paymentRepositoryMock;
         private Mock<IUserRepository> _userRepositoryMock;
         private Mock<IPaymentModelFactory> _paymentModelMock;
-        private Mock<IPaymentModelBuilder> _paymentModelBuilderMock;
-        private Mock<IUserModelBuilder> _userModelBuilderMock;
+        private Mock<IMapper> _autoMapperMock;
         private HomeController _homeController;
         private Guid _guid;
 
@@ -33,8 +33,7 @@ namespace Tests
             _paymentRepositoryMock = new Mock<IPaymentRepository>();
             _userRepositoryMock = new Mock<IUserRepository>();
             _paymentModelMock = new Mock<IPaymentModelFactory>();
-            _paymentModelBuilderMock = new Mock<IPaymentModelBuilder>();
-            _userModelBuilderMock = new Mock<IUserModelBuilder>();
+            _autoMapperMock = new Mock<IMapper>();
             _guid = Guid.NewGuid();
 
             var items = new List<ListItem>
@@ -47,8 +46,7 @@ namespace Tests
             };
 
             var paymentModels = new List<PaymentModel> { new PaymentModel { Amount = 4, Id = _guid, PaidYearly = true, Paid = true, Date = DateTime.Today, Title = "Title" } };
-
-            _userModelBuilderMock.Setup(x => x.BuildViewModel(It.IsAny<UserModel>())).Returns(new Accounts.Models.UserModel());
+            
             _userRepositoryMock.Setup(x => x.GetUsers()).Returns(Task.FromResult(items));
             _userRepositoryMock.Setup(x => x.GetUser(It.IsAny<Guid>())).Returns(Task.FromResult(new UserModel()));
 
@@ -61,7 +59,7 @@ namespace Tests
 
             _paymentModelMock.Setup(x => x.CreatePaymentSummary(It.IsAny<List<Accounts.Models.PaymentModel>>(),It.IsAny<Accounts.Models.UserModel>())).Returns(new PaymentViewModel());
 
-            _homeController = new HomeController(_paymentRepositoryMock.Object, _userRepositoryMock.Object, _paymentModelMock.Object, _paymentModelBuilderMock.Object, _userModelBuilderMock.Object);
+            _homeController = new HomeController(_paymentRepositoryMock.Object, _userRepositoryMock.Object, _paymentModelMock.Object, _autoMapperMock.Object);
         }
 
         [Test]

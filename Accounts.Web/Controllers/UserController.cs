@@ -4,6 +4,7 @@ using System.Web.Mvc;
 using Accounts.Core.Repositories.Interfaces;
 using Accounts.ModelBuilders;
 using Accounts.Models;
+using AutoMapper;
 
 namespace Accounts.Controllers
 {
@@ -11,22 +12,20 @@ namespace Accounts.Controllers
     {
 
         private readonly IUserRepository _userRepository;
-        private readonly IUserModelBuilder _userModelBuilder;
+        private readonly IMapper _mapper;
 
-        public UserController(IUserRepository userRepository, IUserModelBuilder userModelBuilder)
+        public UserController(IUserRepository userRepository, IMapper mapper)
         {
             _userRepository = userRepository;
-            _userModelBuilder = userModelBuilder;
+            _mapper = mapper;
         }
 
         // GET: User
         public async Task<ActionResult> Index()
         {
             SelectListModel model = new SelectListModel { ListItems = new SelectList(await _userRepository.GetUsers(), "Value", "Text") };
-
             return View("Index", model);
         }
-
 
         // GET: User
         public ActionResult Add()
@@ -41,7 +40,7 @@ namespace Accounts.Controllers
         {
             if (ModelState.IsValid)
             {
-                var buildCoreModel = _userModelBuilder.BuildCoreModel(model);
+                var buildCoreModel = _mapper.Map<Core.Models.UserModel>(model);
 
                 Guid addUser = await _userRepository.AddUser(buildCoreModel);
 
@@ -49,19 +48,16 @@ namespace Accounts.Controllers
                 {
                     return RedirectToAction("Index", "User");
                 }
-
             }
-
             return View("Add", model);
-
         }
 
         // GET: User
-        public async Task<ActionResult> Update(Guid Id)
+        public async Task<ActionResult> Update(Guid id)
         {
-            var user = await _userRepository.GetUser(Id);
+            var user = await _userRepository.GetUser(id);
 
-            var buildViewModel = _userModelBuilder.BuildViewModel(user);
+            var buildViewModel = _mapper.Map<UserModel>(user);
 
             if (user == null)
             {
@@ -77,7 +73,7 @@ namespace Accounts.Controllers
         {
             if (ModelState.IsValid)
             {
-                var buildCoreModel = _userModelBuilder.BuildCoreModel(model);
+                var buildCoreModel = _mapper.Map<Core.Models.UserModel>(model);
 
                 int addUser = await _userRepository.UpdateUser(buildCoreModel);
 

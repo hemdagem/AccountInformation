@@ -40,6 +40,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.2.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.5.2.0\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Neat.Procedure">
       <HintPath>..\packages\Neat.Procedure.1.0.6\lib\net40\Neat.Procedure.dll</HintPath>
@@ -126,20 +130,14 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="ModelBuilders\IPaymentModelBuilder.cs" />
-    <Compile Include="ModelBuilders\IUserModelBuilder.cs" />
-    <Compile Include="ModelBuilders\PaymentModelBuilder.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="ModelBuilders\IPaymentModelFactory.cs" />
     <Compile Include="ModelBuilders\PaymentModelFactory.cs" />
-    <Compile Include="ModelBuilders\UserModelBuilder.cs" />
     <Compile Include="Models\HomeControllerModel.cs" />
-    <Compile Include="Models\ListItem.cs" />
     <Compile Include="Models\PaymentModel.cs" />
-    <Compile Include="Models\PaymentTypes.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />
     <Compile Include="Models\SelectListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
