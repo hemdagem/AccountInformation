@@ -19,15 +19,21 @@
                 <div class="panel-body">
                     <form class="form-horizontal" role="form">
                         <div class="form-group">
+                            <label class="col-xs-2 control-label">Title</label>
+                            <div class="col-xs-10">
+                                <input type="text" id="title" data-bind="value: Title" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-xs-2 control-label" for="Amount">Monthly Amount</label>
                             <div class="col-xs-10">
-                                <input type="number" min="10.00" max="100000.00" class="form-control" id="Amount" data-bind="value: AmountToAdd">
+                                <input type="number" min="10.00" max="100000.00" class="form-control" id="Amount" data-bind="value: AmountToAdd" required>
                             </div>
                         </div>
                         <div class="form-group">
                             <label class="col-xs-2 control-label" for="date">Date</label>
                             <div class="col-xs-10">
-                                <input type="date" class="form-control" id="date" data-bind="value: Date">
+                                <input type="date" class="form-control" id="date" data-bind="value: Date" required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -44,12 +50,6 @@
                                 <div class="checkbox">
                                     <input type="checkbox" id="recurring" data-bind="checked: Recurring">
                                 </div>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-xs-2 control-label">Payment Title</label>
-                            <div class="col-xs-10">
-                                <input type="text" id="title" data-bind="checked: Title">
                             </div>
                         </div>
                         <div class="form-group">

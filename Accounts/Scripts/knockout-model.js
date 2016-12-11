@@ -13,7 +13,7 @@ function PaymentViewModel() {
     self.AmountToAdd = ko.observable(0);
     self.PaidYearly = ko.observable();
     self.Recurring = ko.observable();
-    self.Title = ko.observable(0);
+    self.Title = ko.observable();
     self.Date = ko.observable();
     self.Recurring = ko.observable();
 
@@ -126,7 +126,6 @@ function PaymentViewModel() {
 
         this.Day = ko.observable(currentDay.day);
         this.Date = ko.observable(currentDay.fullDate);
-        this.Title = ko.observable(data.Title);
         var paid = this.Paid;
         this.alreadyPaid = ko.pureComputed(function () {
             return paid() === true ? "success" : "danger";
