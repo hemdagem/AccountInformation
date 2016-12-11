@@ -108,15 +108,15 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataReaderTestHelper.cs" />
-    <Compile Include="PaymentHelperTests.cs" />
-    <Compile Include="PaymentModelBuilderTests.cs" />
-    <Compile Include="PaymentModelFactoryTests.cs" />
-    <Compile Include="UserControllerTests.cs" />
-    <Compile Include="UserRepositoryTests.cs" />
-    <Compile Include="HomeControllerTests.cs" />
-    <Compile Include="PaymentRepositoryTests.cs" />
-    <Compile Include="PaymentViewModelTests.cs" />
+    <Compile Include="TestHelpers\DataReaderTestHelper.cs" />
+    <Compile Include="Accounts.Core\Helpers\PaymentHelperTests.cs" />
+    <Compile Include="Accounts.Core\ModelBuilders\PaymentModelBuilderTests.cs" />
+    <Compile Include="Accounts.Web\ModelBuilders\PaymentModelFactoryTests.cs" />
+    <Compile Include="Accounts.Web\Controllers\UserControllerTests.cs" />
+    <Compile Include="Accounts.Core\Repositories\UserRepositoryTests.cs" />
+    <Compile Include="Accounts.Web\Controllers\HomeControllerTests.cs" />
+    <Compile Include="Accounts.Core\Repositories\PaymentRepositoryTests.cs" />
+    <Compile Include="Accounts.Web\Models\PaymentViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +133,7 @@
       <Name>Accounts.Web</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
