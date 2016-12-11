@@ -49,7 +49,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Interfaces\IPaymentRepository.cs" />
     <Compile Include="Repositories\Interfaces\IUserRepository.cs" />
-    <Compile Include="Models\PaymentTypes.cs" />
     <Compile Include="Models\ListItem.cs" />
     <Compile Include="Models\PaymentModel.cs" />
     <Compile Include="Models\PaymentViewModel.cs" />

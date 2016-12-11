@@ -70,7 +70,6 @@ namespace Accounts
             kernel.Bind<IClock>().To<Clock>();
             kernel.Bind<IPaymentModelBuilder>().To<Core.ModelBuilders.PaymentModelBuilder>();
             kernel.Bind<ModelBuilders.IPaymentModelBuilder>().To<PaymentModelBuilder>();
-            kernel.Bind<IPaymentTypeModelBuilder>().To<PaymentTypeModelBuilder>();
             kernel.Bind<IUserModelBuilder>().To<UserModelBuilder>();
 
             kernel.Bind<IPaymentRepository>().To<PaymentRepository>();

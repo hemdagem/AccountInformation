@@ -127,10 +127,8 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="ModelBuilders\IPaymentModelBuilder.cs" />
-    <Compile Include="ModelBuilders\IPaymentTypeModelBuilder.cs" />
     <Compile Include="ModelBuilders\IUserModelBuilder.cs" />
     <Compile Include="ModelBuilders\PaymentModelBuilder.cs" />
-    <Compile Include="ModelBuilders\PaymentTypeModelBuilder.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
