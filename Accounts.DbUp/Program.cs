@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using DbUp;
 
 namespace Accounts.DbUp
@@ -14,7 +10,7 @@ namespace Accounts.DbUp
         static int Main(string[] args)
         {
             var connectionString = ConfigurationManager.ConnectionStrings["AccountDb"].ConnectionString;
-
+            EnsureDatabase.For.SqlDatabase(connectionString);
 
             var upgrader =
                 DeployChanges.To
