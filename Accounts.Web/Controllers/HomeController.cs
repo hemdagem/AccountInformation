@@ -5,8 +5,6 @@ using Accounts.Core.Repositories.Interfaces;
 using Accounts.Web.ModelBuilders;
 using Accounts.Web.Models;
 using AutoMapper;
-using PaymentModel = Accounts.Web.Models.PaymentModel;
-using PaymentViewModel = Accounts.Web.Models.PaymentViewModel;
 
 
 namespace Accounts.Web.Controllers

@@ -69,6 +69,16 @@ namespace Accounts.Web
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+            var mapperConfiguration = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Core.Models.PaymentModel, PaymentModel>();
+                cfg.CreateMap<PaymentModel, Core.Models.PaymentModel>();
+                cfg.CreateMap<Core.Models.UserModel, UserModel>();
+                cfg.CreateMap<UserModel, Core.Models.UserModel>();
+            });
+
+            kernel.Bind<IMapper>().ToConstant(mapperConfiguration.CreateMapper());
+
             kernel.Bind<IClock>().To<Clock>();
             kernel.Bind<IPaymentModelBuilder>().To<Core.ModelBuilders.PaymentModelBuilder>();
 
@@ -80,13 +90,7 @@ namespace Accounts.Web
             kernel.Bind<IConnectionString>().To<ConnectionString>()
                 .WithConstructorArgument("connectionString", "AccountDb");
 
-            var mapperConfiguration = new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Core.Models.PaymentModel, PaymentModel>();
-                cfg.CreateMap<Core.Models.UserModel, UserModel>();
-            });
 
-            kernel.Bind<IMapper>().ToConstant(mapperConfiguration.CreateMapper());
         }        
     }
 }
