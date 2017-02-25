@@ -1,6 +1,6 @@
 ﻿@model Accounts.Web.Models.HomeControllerModel
 @Html.Partial("PaymentSummary")
-@Html.HiddenFor(model => model.Users, new { Id = "user"})
+@Html.HiddenFor(model => model.Users, new { Id = "user" })
 @Html.Partial("AddPayment")
 <div class="row">
     <div class="container">
@@ -9,6 +9,7 @@
                 <tr>
                     <th>Title</th>
                     <th>Amount</th>
+                    <th>Type</th>
                     <th>Payment day</th>
                     <th></th>
                 </tr>
@@ -22,6 +23,7 @@
     <tr data-bind="css: alreadyPaid">
         <td data-bind="html: Title"></td>
         <td data-bind="text: '£'+ Amount()"></td>
+        <td data-bind="html: Type"></td>
         <td data-bind="text: Date"></td>
         <td>
             <button type="submit" class="btn btn-danger btn-xs" data-bind="click: DeletePayment.bind($data,$parent), value: PaymentId">Delete</button>
@@ -33,10 +35,13 @@
 <script type="text/html" id="edit-template">
     <tr data-bind="css: alreadyPaid">
         <td>
-            <input type="text" id="title" data-bind="value: Title" class="form-control"/>
+            <input type="text" id="title" data-bind="value: Title" class="form-control" />
+
+        </td>
+        <td>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" id="paidYearly" data-bind="checked: Recurring"> Recurring
+                    <input type="checkbox" id="recurring" data-bind="checked: Recurring"> Recurring
                 </label>
             </div>
             <div class="checkbox">

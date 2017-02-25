@@ -113,9 +113,10 @@ function PaymentViewModel() {
     }
 
     function payment(data) {
-        this.Title = ko.observable(data.Title + " " +
+        this.Title = ko.observable(data.Title);
+        this.Type =
             (data.PaidYearly === true ? "<span class=\"label label-warning\">Paid Yearly</span>" : "") +
-            (data.Recurring === true ? "<span class=\"label label-info\">Recurring</span>" : ""));
+            (data.Recurring === true ? "<span class=\"label label-info\">Recurring</span>" : "");
         this.PaymentId = ko.observable(data.Id);
         this.Amount = ko.observable(data.Amount);
         this.Paid = ko.observable(data.Paid);
