@@ -114,7 +114,7 @@
     <Compile Include="Accounts.Web\ModelBuilders\PaymentModelFactoryTests.cs" />
     <Compile Include="Accounts.Web\Controllers\UserControllerTests.cs" />
     <Compile Include="Accounts.Core\Repositories\UserRepositoryTests.cs" />
-    <Compile Include="Accounts.Web\Controllers\HomeControllerTests.cs" />
+    <Compile Include="Accounts.Web\Controllers\PaymentControllerTests.cs" />
     <Compile Include="Accounts.Core\Repositories\PaymentRepositoryTests.cs" />
     <Compile Include="Accounts.Web\Models\PaymentViewModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -17,13 +17,13 @@ using UserModel = Accounts.Core.Models.UserModel;
 namespace Accounts.Tests.Unit.Accounts.Web.Controllers
 {
     [TestFixture]
-    public class HomeControllerTests
+    public class PaymentControllerTests
     {
         private Mock<IPaymentRepository> _paymentRepositoryMock;
         private Mock<IUserRepository> _userRepositoryMock;
         private Mock<IPaymentModelFactory> _paymentModelMock;
         private Mock<IMapper> _autoMapperMock;
-        private HomeController _homeController;
+        private PaymentsController _homeController;
         private Guid _guid;
 
         [SetUp]
@@ -58,7 +58,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
 
             _paymentModelMock.Setup(x => x.CreatePaymentSummary(It.IsAny<List<global::Accounts.Web.Models.PaymentModel>>(),It.IsAny<global::Accounts.Web.Models.UserModel>())).Returns(new PaymentViewModel());
 
-            _homeController = new HomeController(_paymentRepositoryMock.Object, _userRepositoryMock.Object, _paymentModelMock.Object, _autoMapperMock.Object);
+            _homeController = new PaymentsController(_paymentRepositoryMock.Object, _userRepositoryMock.Object, _paymentModelMock.Object, _autoMapperMock.Object);
         }
 
         [Test]

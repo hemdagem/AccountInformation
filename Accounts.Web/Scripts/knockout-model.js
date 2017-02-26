@@ -28,7 +28,7 @@ function PaymentViewModel() {
             Recurring: self.Recurring()
         };
 
-        $.ajax("/Home/AddPayment", {
+        $.ajax("/Payments/AddPayment", {
             data: JSON.stringify(model),
             type: "post",
             contentType: "application/json",
@@ -55,7 +55,7 @@ function PaymentViewModel() {
             paymentId: $("#paymentIdHid").val()
         };
 
-        $.ajax("/Home/DeletePayment", {
+        $.ajax("/Payments/DeletePayment", {
             data: JSON.stringify(model),
             type: "post",
             contentType: "application/json",
@@ -77,7 +77,7 @@ function PaymentViewModel() {
     };
 
     function getPayments(userId) {
-        $.getJSON("/Home/GetPaymentSummaryById/", {
+        $.getJSON("/Payments/GetPaymentSummaryById/", {
             "userGuid": userId
 
         }, function (allData) {
@@ -156,7 +156,7 @@ function PaymentViewModel() {
                 Recurring: currentData.Recurring()
             };
 
-            $.ajax("/Home/UpdatePayment", {
+            $.ajax("/Payments/UpdatePayment", {
                 data: JSON.stringify(model),
                 type: "post",
                 contentType: "application/json",
