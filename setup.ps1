@@ -30,7 +30,7 @@ refreshenv
 
 try
 {
-    pushd Accounts
+    pushd Accounts.Web
     npm install
     npm install gulp -g
 

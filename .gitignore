@@ -256,3 +256,5 @@ Accounts/Content/*.min.css
 Accounts/Content/style.min.css
 /Accounts.Web/Content/style.min.css
 /Accounts.Web/Content/compiled
+/package-lock.json
+/Accounts.Web/package-lock.json
