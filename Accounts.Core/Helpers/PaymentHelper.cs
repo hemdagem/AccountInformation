@@ -5,11 +5,11 @@ namespace Accounts.Core.Helpers
     // This class needs to be reworked.
     public class PaymentHelper : IPaymentHelper
     {
-        private readonly DateTime _date;
+        private readonly DateTime _currentDateTime;
 
         public PaymentHelper(IClock clock)
         {
-            _date = clock.GetDateTime();
+            _currentDateTime = clock.GetDateTime();
         }
 
         public DateTime GetPaymentRecurringDate(int payDay, DateTime paymentDate)
@@ -17,17 +17,17 @@ namespace Accounts.Core.Helpers
             if (payDay < 1 || payDay > 31)
                 throw new ArgumentOutOfRangeException();
 
-            if (payDay > _date.Day)
+            if (payDay > _currentDateTime.Day)
             {
                 if (paymentDate.Day >= payDay)
                 {
                     return new DateTime(GetPreviousYear(), GetPreviousMonth(), paymentDate.Day);
                 }
 
-                return new DateTime(_date.Year, _date.Month, paymentDate.Day);
+                return new DateTime(_currentDateTime.Year, _currentDateTime.Month, paymentDate.Day);
             }
-            var month = _date.Month;
-            int year = _date.Year;
+            var month = _currentDateTime.Month;
+            int year = _currentDateTime.Year;
 
             if (paymentDate.Day < payDay)
             {
@@ -43,7 +43,7 @@ namespace Accounts.Core.Helpers
             if (payDay < 1 || payDay > 31)
                 throw new ArgumentOutOfRangeException();
 
-            return new DateTime(_date.Year, _date.Month, payDay);
+            return new DateTime(_currentDateTime.Year, _currentDateTime.Month, payDay);
         }
 
         public DateTime GetNextPayDay(int payDay)
@@ -56,27 +56,27 @@ namespace Accounts.Core.Helpers
 
         public bool HasPaid(DateTime paymentDate)
         {
-            return paymentDate <= _date;
+            return paymentDate <= _currentDateTime;
         }
 
         private int GetYear()
         {
-            return _date.Month == 12 ? _date.Year + 1 : _date.Year;
+            return _currentDateTime.Month == 12 ? _currentDateTime.Year + 1 : _currentDateTime.Year;
         }
 
         private int GetMonth()
         {
-            return _date.Month == 12 ? 1 : _date.Month + 1;
+            return _currentDateTime.Month == 12 ? 1 : _currentDateTime.Month + 1;
         }
 
         private int GetPreviousMonth()
         {
-            return _date.Month == 1 ? 12 : _date.Month - 1;
+            return _currentDateTime.Month == 1 ? 12 : _currentDateTime.Month - 1;
         }
 
         private int GetPreviousYear()
         {
-            return _date.Month == 1 ? _date.Year - 1 : _date.Year;
+            return _currentDateTime.Month == 1 ? _currentDateTime.Year - 1 : _currentDateTime.Year;
         }
 
     }
