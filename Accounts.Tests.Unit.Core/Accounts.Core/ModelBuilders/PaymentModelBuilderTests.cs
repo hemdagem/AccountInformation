@@ -4,11 +4,12 @@ using Accounts.Core.Helpers;
 using Accounts.Core.ModelBuilders;
 using Accounts.Tests.Unit.TestHelpers;
 using Moq;
-using NUnit.Framework;
+using Xunit;
+
 
 namespace Accounts.Tests.Unit.Accounts.Core.ModelBuilders
 {
-    [TestFixture]
+    
     public class PaymentModelBuilderTests
     {
         Mock<IPaymentHelper> _paymentHelperMock;
@@ -22,17 +23,17 @@ namespace Accounts.Tests.Unit.Accounts.Core.ModelBuilders
         }
 
 
-        [Test]
+        [Fact]
         public void Build_should_return_empty_list_when_reader_is_null()
         {
             //given + when
             var paymentModels = _builder.Build(null);
 
             // then
-            Assert.AreEqual(0,paymentModels.Count);
+            Assert.Empty(paymentModels);
         }
 
-        [Test]
+        [Fact]
         public void Build_should_populate_core_list_model_when_reader_has_rows()
         {
             // given
@@ -52,7 +53,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.ModelBuilders
             var paymentModels = _builder.Build(dataReader);
 
             // then
-            Assert.AreEqual(1, paymentModels.Count);
+            Assert.Single(paymentModels);
         }
     }
 }

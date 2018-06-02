@@ -9,11 +9,11 @@ using Accounts.Core.Repositories;
 using Accounts.Database.DataAccess.Interfaces;
 using Accounts.Tests.Unit.TestHelpers;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 
 namespace Accounts.Tests.Unit.Accounts.Core.Repositories
 {
-    [TestFixture]
+
     public class PaymentRepositoryTests
     {
         private Mock<IDbConnectionFactory> _dataAccessMock;
@@ -23,8 +23,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
         private PaymentModel _paymentModel;
         private Mock<IPaymentModelBuilder> _paymentModelBuilderMock;
 
-        [SetUp]
-        public void Setup()
+        public PaymentRepositoryTests()
         {
             _guid = Guid.NewGuid();
             _dataAccessMock = new Mock<IDbConnectionFactory>();
@@ -54,7 +53,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             _paymentRepository = new PaymentRepository(_dataAccessMock.Object, _paymentModelBuilderMock.Object);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldReturnDataWhenUserIsFound()
         {
             //given
@@ -78,28 +77,27 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             var paymentsById = await _paymentRepository.GetPaymentsById(It.IsAny<Guid>());
 
             //then
-            Assert.That(paymentsById.Count, Is.EqualTo(1));
-            Assert.That(paymentsById[0].Amount, Is.EqualTo(_paymentModelList[0].Amount));
-            Assert.That(paymentsById[0].Id, Is.EqualTo(_paymentModelList[0].Id));
-            Assert.That(paymentsById[0].PaidYearly, Is.EqualTo(_paymentModelList[0].PaidYearly));
-            Assert.That(paymentsById[0].Paid, Is.EqualTo(_paymentModelList[0].Paid));
-            Assert.That(paymentsById[0].Date, Is.EqualTo(_paymentModelList[0].Date));
-            Assert.That(paymentsById[0].Title, Is.EqualTo(_paymentModelList[0].Title));
+            Assert.Equal(1, paymentsById.Count);
+            Assert.Equal(paymentsById[0].Amount, _paymentModelList[0].Amount);
+            Assert.Equal(paymentsById[0].Id, _paymentModelList[0].Id);
+            Assert.Equal(paymentsById[0].PaidYearly, _paymentModelList[0].PaidYearly);
+            Assert.Equal(paymentsById[0].Paid, _paymentModelList[0].Paid);
+            Assert.Equal(paymentsById[0].Date, _paymentModelList[0].Date);
+            Assert.Equal(paymentsById[0].Title, _paymentModelList[0].Title);
         }
-
-        [Test]
-        public void GetPaymentsById_Should_throw_null_exception_when_no_data_is_found()
+        [Fact]
+        public async Task GetPaymentsById_Should_throw_null_exception_when_no_data_is_found()
         {
             //given
             _dataAccessMock.Setup(x => x.ExecuteReader("up_GetPaymentsById", It.IsAny<SqlParameter>())).Returns(Task.FromResult<IDataReader>(null));
             //when
 
             //then
-            _paymentModelBuilderMock.Verify(x=>x.Build(It.IsAny<SqlDataReader>()),Times.Never);
-            Assert.Throws<NullReferenceException>(async () => await _paymentRepository.GetPaymentsById(It.IsAny<Guid>()));
+            _paymentModelBuilderMock.Verify(x => x.Build(It.IsAny<SqlDataReader>()), Times.Never);
+            await Assert.ThrowsAsync<NullReferenceException>(() => _paymentRepository.GetPaymentsById(It.IsAny<Guid>()));
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldReturnNewGuidWhenPaymentAdded()
         {
             //given
@@ -110,11 +108,10 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             var paymentsById = await _paymentRepository.AddPayment(_paymentModel);
 
             //then
-            Assert.That(paymentsById, Is.EqualTo(_guid));
+            Assert.Equal(paymentsById,_guid);
         }
 
-        [Test]
-        [ExpectedException(typeof(NullReferenceException))]
+        [Fact]
         public async Task ShouldThrowExceptionWhenNothingisReturned()
         {
             //given
@@ -127,13 +124,13 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             _dataAccessMock.Setup(x => x.ExecuteScalar<Guid>("up_AddPayment", guidSqlParameter, amountSqlParameter, dateSqlParameter, paidYearlySqlParameter, paymentTypeSqlParameter)).Returns(Task.FromResult(Guid.Empty));
 
             //when
-            await _paymentRepository.AddPayment(_paymentModel);
+            await Assert.ThrowsAsync<NullReferenceException>(() => _paymentRepository.AddPayment(_paymentModel));
+
         }
 
-
-        [Test]
-        [TestCase(1)]
-        [TestCase(5)]
+        [Theory]
+        [InlineData(1)]
+        [InlineData(5)]
         public async Task ShouldReturnRowsAffectedWhenDeletingPayment(int rowsAffected)
         {
             //given
@@ -141,12 +138,12 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
 
             var deletePayment = await _paymentRepository.DeletePayment(_guid);
 
-            Assert.That(deletePayment, Is.EqualTo(rowsAffected));
+            Assert.Equal(deletePayment,rowsAffected);
         }
 
-        [Test]
-        [TestCase(1)]
-        [TestCase(5)]
+        [Theory]
+        [InlineData(1)]
+        [InlineData(5)]
         public async Task ShouldReturnRowsAffectedWhenUpdatingPayment(int rowsAffected)
         {
             //given
@@ -154,7 +151,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
 
             var updatePayment = await _paymentRepository.UpdatePayment(_paymentModel);
 
-            Assert.That(updatePayment, Is.EqualTo(rowsAffected));
+            Assert.Equal(updatePayment,rowsAffected);
         }
     }
 }

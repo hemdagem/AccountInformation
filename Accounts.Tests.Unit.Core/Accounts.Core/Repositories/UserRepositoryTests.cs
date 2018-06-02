@@ -8,14 +8,15 @@ using Accounts.Core.Repositories;
 using Accounts.Database.DataAccess.Interfaces;
 using Accounts.Tests.Unit.TestHelpers;
 using Moq;
-using NUnit.Framework;
+using Xunit;
+
 
 namespace Accounts.Tests.Unit.Accounts.Core.Repositories
 {
-    [TestFixture]
+
     public class UserRepositoryTests
     {
-        [Test]
+        [Fact]
         public async Task ShouldGetUsers()
         {
             //given
@@ -34,12 +35,12 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             var resultsModels = await repository.GetUsers();
 
             //then
-            Assert.That(resultsModels, Is.Not.Null);
-            Assert.That(resultsModels.First().Text, Is.EqualTo(users["Name"].ToString()));
-            Assert.That(resultsModels.First().Value, Is.EqualTo(users["Id"].ToString()));
+            Assert.NotNull(resultsModels);
+            Assert.Equal(resultsModels.First().Text, users["Name"].ToString());
+            Assert.Equal(resultsModels.First().Value, users["Id"].ToString());
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldGetUser()
         {
             //given
@@ -60,33 +61,33 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             var resultsModels = await repository.GetUser(It.IsAny<Guid>());
 
             //then
-            Assert.That(resultsModels, Is.Not.Null);
-            Assert.That(resultsModels.Name, Is.EqualTo(userModel["Name"]));
-            Assert.That(resultsModels.Amount, Is.EqualTo(userModel["Amount"]));
-            Assert.That(resultsModels.Id, Is.EqualTo(userModel["Id"]));
-            Assert.That(resultsModels.PayDay, Is.EqualTo(userModel["PayDay"]));
+            Assert.NotNull(resultsModels);
+            Assert.Equal(resultsModels.Name, userModel["Name"]);
+            Assert.Equal(resultsModels.Amount, userModel["Amount"]);
+            Assert.Equal(resultsModels.Id, userModel["Id"]);
+            Assert.Equal(resultsModels.PayDay, userModel["PayDay"]);
 
         }
 
-        [Test]
-        [TestCase(1)]
-        [TestCase(5)]
+        [Theory]
+        [InlineData(1)]
+        [InlineData(5)]
         public async Task ShouldReturnRowsAffectedWhenUpdatingUser(int rowsAffected)
         {
             var dataAccessMock = new Mock<IDbConnectionFactory>();
 
             var model = new UserModel();
 
-            dataAccessMock.Setup(x =>  x.ExecuteScalar<int>("up_UpdateUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
+            dataAccessMock.Setup(x => x.ExecuteScalar<int>("up_UpdateUser", It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>(), It.IsAny<SqlParameter>())).Returns(Task.FromResult(rowsAffected));
 
             var paymentRepository = new UserRepository(dataAccessMock.Object);
 
             var updateUser = await paymentRepository.UpdateUser(model);
 
-            Assert.That(updateUser, Is.EqualTo(rowsAffected));
+            Assert.Equal(updateUser, rowsAffected);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldReturnRowsAffectedWhenAddingUser()
         {
             var dataAccessMock = new Mock<IDbConnectionFactory>();
@@ -99,7 +100,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
 
             var updateUser = await userRepository.AddUser(model);
 
-            Assert.That(updateUser, Is.EqualTo(id));
+            Assert.Equal(updateUser, id);
         }
 
     }

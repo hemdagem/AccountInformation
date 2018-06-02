@@ -1,66 +1,64 @@
 ﻿using System;
 using Accounts.Core.Helpers;
 using Moq;
-using NUnit.Framework;
+
+using Xunit;
 
 namespace Accounts.Tests.Unit.Accounts.Core.Helpers
 {
-    [TestFixture]
     public class PaymentHelperTests
     {
         Mock<IClock> _clock;
         private PaymentHelper _paymentHelper;
 
-        [SetUp]
-        public void Setup()
+        public PaymentHelperTests()
         {
             _clock = new Mock<IClock>();
             _clock.Setup(x => x.GetDateTime()).Returns(new DateTime(2015, 10, 10));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Fact]
         public void should_throw_exception_if_pay_day_is_less_than_1_for_getting_payday()
         {
             // given
             _paymentHelper = new PaymentHelper(_clock.Object);
 
             //when + then
-            _paymentHelper.GetPreviousPayDay(0);
+
+            Assert.Throws<ArgumentOutOfRangeException>(() =>_paymentHelper.GetPreviousPayDay(0));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Fact]
         public void should_throw_exception_if_pay_day_is_greater_than_31_for_getting_payday()
         {
             // given
             _paymentHelper = new PaymentHelper(_clock.Object);
 
             //when + then
-            _paymentHelper.GetPreviousPayDay(32);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _paymentHelper.GetPreviousPayDay(32));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Fact]
         public void should_throw_exception_if_pay_day_is_less_than_1_for_getting_next_payday()
         {
             //when + then
             _paymentHelper = new PaymentHelper(_clock.Object);
-            _paymentHelper.GetNextPayDay(0);
+           
+            Assert.Throws<ArgumentOutOfRangeException>(() => _paymentHelper.GetNextPayDay(0));
+
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        [Fact]
         public void should_throw_exception_if_pay_day_is_greater_than_31_for_getting_next_payday()
         {
             // given
             _paymentHelper = new PaymentHelper(_clock.Object);
 
             //when + then
-            _paymentHelper.GetNextPayDay(32);
+            Assert.Throws<ArgumentOutOfRangeException>(() => _paymentHelper.GetNextPayDay(32));
         }
 
-        [Test]
+        [Fact]
         public void should_set_month_to_Janaury_if_month_is_December()
         {
             // given
@@ -71,11 +69,11 @@ namespace Accounts.Tests.Unit.Accounts.Core.Helpers
             var nextPayDay = _paymentHelper.GetNextPayDay(10);
 
             // then
-            Assert.AreEqual(2016, nextPayDay.Year);
-            Assert.AreEqual(1, nextPayDay.Month);
+            Assert.Equal(2016, nextPayDay.Year);
+            Assert.Equal(1, nextPayDay.Month);
         }
 
-        [Test]
+        [Fact]
         public void should_show_previous_month_when_payday_has_not_been_reached_but_the_month_has_changed()
         {
             // given
@@ -86,10 +84,10 @@ namespace Accounts.Tests.Unit.Accounts.Core.Helpers
             var paymentRecurringDate = _paymentHelper.GetPaymentRecurringDate(6, new DateTime(2015, 9, 20));
 
             // then
-            Assert.AreEqual(9, paymentRecurringDate.Month);
+            Assert.Equal(9, paymentRecurringDate.Month);
         }
 
-        [Test]
+        [Fact]
         public void should_show_current_month_when_payday_has_been_reached_and_the_month_has_changed()
         {
             // given
@@ -99,7 +97,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Helpers
             var paymentRecurringDate = _paymentHelper.GetPaymentRecurringDate(10, new DateTime(2015, 10, 10));
 
             // then
-            Assert.AreEqual(10, paymentRecurringDate.Month);
+            Assert.Equal(10, paymentRecurringDate.Month);
         }
     }
 }

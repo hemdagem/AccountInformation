@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Web.Mvc;
 using Accounts.Core.Repositories.Interfaces;
 using Accounts.Web.Controllers;
 using Accounts.Web.ModelBuilders;
 using Accounts.Web.Models;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
-using NUnit.Framework;
+using Xunit;
 using ListItem = Accounts.Core.Models.ListItem;
 using PaymentModel = Accounts.Core.Models.PaymentModel;
 using PaymentViewModel = Accounts.Web.Models.PaymentViewModel;
@@ -16,7 +16,7 @@ using UserModel = Accounts.Core.Models.UserModel;
 
 namespace Accounts.Tests.Unit.Accounts.Web.Controllers
 {
-    [TestFixture]
+    
     public class PaymentControllerTests
     {
         private Mock<IPaymentRepository> _paymentRepositoryMock;
@@ -26,8 +26,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
         private PaymentsController _homeController;
         private Guid _guid;
 
-        [SetUp]
-        public void Setup()
+        public PaymentControllerTests()
         {
             _paymentRepositoryMock = new Mock<IPaymentRepository>();
             _userRepositoryMock = new Mock<IUserRepository>();
@@ -61,57 +60,57 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
             _homeController = new PaymentsController(_paymentRepositoryMock.Object, _userRepositoryMock.Object, _paymentModelMock.Object, _autoMapperMock.Object);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldHaveIndexView()
         {
             var viewResult = await _homeController.Index(It.IsAny<Guid>()) as ViewResult;
 
-            Assert.AreEqual("Index", viewResult.ViewName);
+            Assert.Equal("Index", viewResult.ViewName);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldHaveUserModel()
         {
             var viewResult = await _homeController.Index(It.IsAny<Guid>()) as ViewResult;
 
-            Assert.IsInstanceOf(typeof(HomeControllerModel), viewResult.Model);
+            Assert.IsType<HomeControllerModel>(viewResult.Model);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldHavePaymentViewModelWithValuesSet()
         {
             var viewResult = await _homeController.GetPaymentSummaryById(_guid);
 
-            var paymentViewModel = viewResult.Data as PaymentViewModel;
+            var paymentViewModel = viewResult.Value as PaymentViewModel;
 
-            Assert.IsNotNull(paymentViewModel);
+            Assert.NotNull(paymentViewModel);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldReturnGuidWhenAddingPayment()
         {
             var viewResult = await _homeController.AddPayment(It.IsAny<global::Accounts.Web.Models.PaymentModel>());
-            var paymentViewModel = Guid.Parse(viewResult.Data.ToString());
+            var paymentViewModel = Guid.Parse(viewResult.Value.ToString());
 
-            Assert.That(paymentViewModel, Is.Not.EqualTo(Guid.Empty));
+            Assert.NotEqual(paymentViewModel,Guid.Empty);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldReturnRowsAffectedWhenUpdatingPayment()
         {
             var viewResult = await _homeController.UpdatePayment(It.IsAny<global::Accounts.Web.Models.PaymentModel>());
-            var paymentViewModel = int.Parse(viewResult.Data.ToString());
+            var paymentViewModel = int.Parse(viewResult.Value.ToString());
 
-            Assert.That(paymentViewModel, Is.Not.EqualTo(0));
+            Assert.NotEqual(paymentViewModel,0);
         }
 
-        [Test]
+        [Fact]
         public async Task ShouldReturnRowsAffectedWhenDeletingPayment()
         {
             var viewResult = await _homeController.DeletePayment(It.IsAny<Guid>());
-            var paymentViewModel = int.Parse(viewResult.Data.ToString());
+            var paymentViewModel = int.Parse(viewResult.Value.ToString());
 
-            Assert.That(paymentViewModel, Is.Not.EqualTo(0));
+            Assert.NotEqual(paymentViewModel,0);
         }
     }
 }

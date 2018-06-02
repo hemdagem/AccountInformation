@@ -1,17 +1,18 @@
 ﻿using Accounts.Web.Models;
-using NUnit.Framework;
+using Xunit;
+
 
 namespace Accounts.Tests.Unit.Accounts.Web.Models
 {
-    [TestFixture]
+    
     public class PaymentViewModelTests
     {
-        [Test]
+        [Fact]
         public void PaymentsListShouldNotBeNull()
         {
             var paymentViewModel = new PaymentViewModel();
 
-            Assert.IsNotNull(paymentViewModel.Payments);
+            Assert.NotNull(paymentViewModel.Payments);
         }
     }
 }
