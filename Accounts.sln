@@ -2,19 +2,19 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.DbUp", "Accounts.DbUp\Accounts.DbUp.csproj", "{A8DAD83F-79E4-4A67-91CA-76F2C6396E3C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.DbUp", "src\Accounts.DbUp\Accounts.DbUp.csproj", "{A8DAD83F-79E4-4A67-91CA-76F2C6396E3C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{80C6DA79-3DCB-4567-BBD8-1AEC1088A213}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Core", "Accounts.Core.Standard\Accounts.Core.csproj", "{3F267F28-41BB-4860-9B29-2EADFAFDEB4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Core", "src\Accounts.Core\Accounts.Core.csproj", "{3F267F28-41BB-4860-9B29-2EADFAFDEB4D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Web", "Accounts.Web.Core\Accounts.Web.csproj", "{CD80675E-AC24-4115-A8F7-B8C5BD5E039A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Web", "src\Accounts.Web\Accounts.Web.csproj", "{CD80675E-AC24-4115-A8F7-B8C5BD5E039A}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{9447FA7E-39DF-4DD0-95D2-58BA82A49CA6}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "src\docker-compose.dcproj", "{9447FA7E-39DF-4DD0-95D2-58BA82A49CA6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Database", "Accounts.Database.Core\Accounts.Database.csproj", "{4D3581FF-9B21-465F-A390-88D5357DDE9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Database", "src\Accounts.Database\Accounts.Database.csproj", "{4D3581FF-9B21-465F-A390-88D5357DDE9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Tests.Unit", "Accounts.Tests.Unit.Core\Accounts.Tests.Unit.csproj", "{A302C894-7F27-4A00-A018-AE0DAAF4CACC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accounts.Tests.Unit", "src\Accounts.Tests.Unit\Accounts.Tests.Unit.csproj", "{A302C894-7F27-4A00-A018-AE0DAAF4CACC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
