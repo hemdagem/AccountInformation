@@ -1,0 +1,8 @@
+version: '3'
+
+services:
+  accounts.web.core:
+    image: accountswebcore
+    build:
+      context: .
+      dockerfile: Accounts.Web.Core/Dockerfile
