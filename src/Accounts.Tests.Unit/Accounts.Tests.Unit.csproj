@@ -4,6 +4,12 @@
     <TargetFramework>netcoreapp2.0</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <ApplicationIcon />
+
+    <OutputType>Library</OutputType>
+
+    <StartupObject />
   </PropertyGroup>
 
   <ItemGroup>
@@ -15,9 +21,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Accounts.Core.Standard\Accounts.Core.csproj" />
-    <ProjectReference Include="..\Accounts.Database.Core\Accounts.Database.csproj" />
-    <ProjectReference Include="..\Accounts.Web.Core\Accounts.Web.csproj" />
+    <ProjectReference Include="..\Accounts.Core\Accounts.Core.csproj" />
+    <ProjectReference Include="..\Accounts.Database\Accounts.Database.csproj" />
+    <ProjectReference Include="..\Accounts.Web\Accounts.Web.csproj" />
   </ItemGroup>
 
 </Project>

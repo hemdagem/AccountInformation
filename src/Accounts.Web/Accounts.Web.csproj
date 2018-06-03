@@ -35,8 +35,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Accounts.Core.Standard\Accounts.Core.csproj" />
-    <ProjectReference Include="..\Accounts.Database.Core\Accounts.Database.csproj" />
+    <ProjectReference Include="..\Accounts.Core\Accounts.Core.csproj" />
+    <ProjectReference Include="..\Accounts.Database\Accounts.Database.csproj" />
   </ItemGroup>
 
 </Project>

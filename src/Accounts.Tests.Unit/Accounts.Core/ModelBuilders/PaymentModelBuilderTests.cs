@@ -15,8 +15,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.ModelBuilders
         Mock<IPaymentHelper> _paymentHelperMock;
         private PaymentModelBuilder _builder;
 
-        [SetUp]
-        public void Setup()
+        public PaymentModelBuilderTests()
         {
             _paymentHelperMock = new Mock<IPaymentHelper>();
             _builder =new PaymentModelBuilder(_paymentHelperMock.Object);
