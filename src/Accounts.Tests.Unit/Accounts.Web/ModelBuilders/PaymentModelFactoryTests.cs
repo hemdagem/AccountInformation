@@ -53,7 +53,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.ModelBuilders
             Assert.Equal(payments.Count,1);
             Assert.Equal(dictionary["Id"], payments[0].Id);
             Assert.Equal(dictionary["Title"], payments[0].Title);
-            Assert.Equal(dictionary["Amount"], payments[0].Amount);
+            Assert.NotStrictEqual(dictionary["Amount"], payments[0].Amount);
             Assert.Equal(dictionary["PaidYearly"], payments[0].PaidYearly);
             Assert.Equal(dictionary["Recurring"], payments[0].Recurring);
             Assert.Equal(dictionary["PayDay"], 6);

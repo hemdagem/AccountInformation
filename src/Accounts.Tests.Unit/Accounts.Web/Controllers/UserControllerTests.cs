@@ -113,7 +113,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
         [Fact]
         public async Task ShouldRedirectToIndexPageIfUserAddedSuccessfully()
         {
-            RedirectToRouteResult result = await userController.Add(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToRouteResult;
+            RedirectToActionResult result = await userController.Add(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToActionResult;
 
             Assert.Equal("Index", result.RouteValues["Action"]);
             Assert.Equal("User", result.RouteValues["Controller"]);
@@ -140,8 +140,8 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
         [Fact]
         public async Task ShouldRedirectToIndexPageIfUserUpdatedSuccessfully()
         {
-            RedirectToRouteResult result = await userController.Update(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToRouteResult;
-
+            RedirectToActionResult result = await userController.Update(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToActionResult;
+            
             Assert.Equal("Index", result.RouteValues["Action"]);
             Assert.Equal("User", result.RouteValues["Controller"]);
         }

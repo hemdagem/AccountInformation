@@ -63,7 +63,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             //then
             Assert.NotNull(resultsModels);
             Assert.Equal(resultsModels.Name, userModel["Name"]);
-            Assert.Equal(resultsModels.Amount, userModel["Amount"]);
+            Assert.NotStrictEqual(resultsModels.Amount, userModel["Amount"]);
             Assert.Equal(resultsModels.Id, userModel["Id"]);
             Assert.Equal(resultsModels.PayDay, userModel["PayDay"]);
 
