@@ -115,8 +115,8 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
         {
             RedirectToActionResult result = await userController.Add(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToActionResult;
 
-            Assert.Equal("Index", result.RouteValues["Action"]);
-            Assert.Equal("User", result.RouteValues["Controller"]);
+            Assert.Equal("Index", result.ActionName);
+            Assert.Equal("User", result.ControllerName);
         }
 
         [Fact]
@@ -142,8 +142,8 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
         {
             RedirectToActionResult result = await userController.Update(It.IsAny<global::Accounts.Web.Models.UserModel>()) as RedirectToActionResult;
             
-            Assert.Equal("Index", result.RouteValues["Action"]);
-            Assert.Equal("User", result.RouteValues["Controller"]);
+            Assert.Equal("Index", result.ActionName);
+            Assert.Equal("User", result.ControllerName);
         }
 
         [Fact]
