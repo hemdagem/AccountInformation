@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Core", "src\Accoun
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Web", "src\Accounts.Web\Accounts.Web.csproj", "{CD80675E-AC24-4115-A8F7-B8C5BD5E039A}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "src\docker-compose.dcproj", "{9447FA7E-39DF-4DD0-95D2-58BA82A49CA6}"
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "src\docker\docker-compose.dcproj", "{9447FA7E-39DF-4DD0-95D2-58BA82A49CA6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accounts.Database", "src\Accounts.Database\Accounts.Database.csproj", "{4D3581FF-9B21-465F-A390-88D5357DDE9D}"
 EndProject

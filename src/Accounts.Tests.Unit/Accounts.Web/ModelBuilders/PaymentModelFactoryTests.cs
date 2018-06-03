@@ -24,7 +24,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.ModelBuilders
             var payments = paymentModelFactory.CreatePayments(null);
 
             // then
-            Assert.Equal(payments.Count,0);
+            Assert.Empty(payments);
         }
 
         [Fact]
@@ -50,13 +50,13 @@ namespace Accounts.Tests.Unit.Accounts.Web.ModelBuilders
             var payments = paymentModelFactory.CreatePayments(new List<PaymentModel> { new PaymentModel { Id = Id, Title = "Mobile", Amount = 20.00M, PaidYearly = true, Recurring = true, PayDay = 6, Date = DateTime.Today } });
 
             // then
-            Assert.Equal(payments.Count,1);
+            Assert.Single(payments);
             Assert.Equal(dictionary["Id"], payments[0].Id);
             Assert.Equal(dictionary["Title"], payments[0].Title);
             Assert.NotStrictEqual(dictionary["Amount"], payments[0].Amount);
             Assert.Equal(dictionary["PaidYearly"], payments[0].PaidYearly);
             Assert.Equal(dictionary["Recurring"], payments[0].Recurring);
-            Assert.Equal(dictionary["PayDay"], 6);
+            Assert.Equal(6, dictionary["PayDay"]);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.ModelBuilders
             Assert.Equal(0,payments.RemainingEachMonth);
             Assert.Equal(0,payments.TotalAmountToPayThisMonth);
             Assert.Equal(0,payments.YearlyAmountEachMonth);
-            Assert.Equal(0,payments.Payments.Count());
+            Assert.Empty(payments.Payments);
         }
 
         [Fact]
@@ -94,7 +94,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.ModelBuilders
             Assert.Equal(0, payments.RemainingEachMonth);
             Assert.Equal(0, payments.TotalAmountToPayThisMonth);
             Assert.Equal(0, payments.YearlyAmountEachMonth);
-            Assert.Equal(0, payments.Payments.Count());
+            Assert.Empty(payments.Payments);
         }
 
     }

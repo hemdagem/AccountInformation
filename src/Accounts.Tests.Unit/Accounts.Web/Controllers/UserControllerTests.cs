@@ -70,8 +70,8 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
 
             var controllerModel = viewResult.Model as SelectListModel;
 
-            Assert.Equal(controllerModel.ListItems.Count(), 1);
-            Assert.Equal(controllerModel.ListItems.First().Text, "Test");
+            Assert.Single(controllerModel.ListItems);
+            Assert.Equal("Test", controllerModel.ListItems.First().Text);
             Assert.Equal(controllerModel.ListItems.First().Value, guid.ToString());
         }
 

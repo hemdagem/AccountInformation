@@ -101,7 +101,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
             var viewResult = await _homeController.UpdatePayment(It.IsAny<global::Accounts.Web.Models.PaymentModel>());
             var paymentViewModel = int.Parse(viewResult.Value.ToString());
 
-            Assert.NotEqual(paymentViewModel,0);
+            Assert.NotEqual(0, paymentViewModel);
         }
 
         [Fact]
@@ -110,7 +110,7 @@ namespace Accounts.Tests.Unit.Accounts.Web.Controllers
             var viewResult = await _homeController.DeletePayment(It.IsAny<Guid>());
             var paymentViewModel = int.Parse(viewResult.Value.ToString());
 
-            Assert.NotEqual(paymentViewModel,0);
+            Assert.NotEqual(0, paymentViewModel);
         }
     }
 }

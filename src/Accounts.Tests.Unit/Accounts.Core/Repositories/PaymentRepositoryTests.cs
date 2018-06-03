@@ -77,7 +77,7 @@ namespace Accounts.Tests.Unit.Accounts.Core.Repositories
             var paymentsById = await _paymentRepository.GetPaymentsById(It.IsAny<Guid>());
 
             //then
-            Assert.Equal(1, paymentsById.Count);
+            Assert.Single(paymentsById);
             Assert.Equal(paymentsById[0].Amount, _paymentModelList[0].Amount);
             Assert.Equal(paymentsById[0].Id, _paymentModelList[0].Id);
             Assert.Equal(paymentsById[0].PaidYearly, _paymentModelList[0].PaidYearly);
