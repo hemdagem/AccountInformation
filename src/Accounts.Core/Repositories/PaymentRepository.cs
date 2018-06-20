@@ -36,14 +36,14 @@ namespace Accounts.Core.Repositories
             return paymentModels;
         }
 
-        public async Task<Guid> AddPayment(PaymentModel model)
+        public async Task<Guid> AddPayment(PaymentModel paymentModel)
         {
-            var idParameter = new SqlParameter("IncomeId", model.IncomeId);
-            var amountParameter = new SqlParameter("Amount", model.Amount);
-            var dateParameter = new SqlParameter("Date", model.Date);
-            var paidYearlyParameter = new SqlParameter("PaidYearly", model.PaidYearly);
-            var recurringParameter = new SqlParameter("Recurring", model.Recurring);
-            var titleParameter = new SqlParameter("Title", model.Title);
+            var idParameter = new SqlParameter("IncomeId", paymentModel.IncomeId);
+            var amountParameter = new SqlParameter("Amount", paymentModel.Amount);
+            var dateParameter = new SqlParameter("Date", paymentModel.Date);
+            var paidYearlyParameter = new SqlParameter("PaidYearly", paymentModel.PaidYearly);
+            var recurringParameter = new SqlParameter("Recurring", paymentModel.Recurring);
+            var titleParameter = new SqlParameter("Title", paymentModel.Title);
 
             var paymentList = await _dataAccess.ExecuteScalar<Guid>("up_AddPayment", idParameter, amountParameter, dateParameter, paidYearlyParameter, recurringParameter, titleParameter);
 

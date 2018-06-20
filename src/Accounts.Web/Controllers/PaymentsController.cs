@@ -56,9 +56,10 @@ namespace Accounts.Web.Controllers
             return Json(paymentViewModel);
         }
 
-        public async Task<JsonResult> AddPayment(PaymentModel model)
+        [HttpPost]
+        public async Task<JsonResult> AddPayment([FromBody]PaymentModel paymentModel)
         {
-            var buildCoreModel = _mapper.Map<Accounts.Core.Models.PaymentModel>(model);
+            var buildCoreModel = _mapper.Map<Accounts.Core.Models.PaymentModel>(paymentModel);
             Guid addPayment = await _paymentRepository.AddPayment(buildCoreModel);
             return Json(addPayment);
         }
@@ -69,7 +70,7 @@ namespace Accounts.Web.Controllers
             return Json(addPayment);
         }
 
-        public async Task<JsonResult> UpdatePayment(PaymentModel model)
+        public async Task<JsonResult> UpdatePayment([FromBody]PaymentModel model)
         {
             var buildCoreModel = _mapper.Map<Accounts.Core.Models.PaymentModel>(model);
             int addPayment = await _paymentRepository.UpdatePayment(buildCoreModel);

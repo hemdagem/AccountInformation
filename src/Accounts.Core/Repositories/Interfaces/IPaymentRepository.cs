@@ -8,7 +8,7 @@ namespace Accounts.Core.Repositories.Interfaces
     public interface IPaymentRepository
     {
         Task<List<PaymentModel>> GetPaymentsById(Guid userId);
-        Task<Guid> AddPayment(PaymentModel model);
+        Task<Guid> AddPayment(PaymentModel paymentModel);
         Task<int> DeletePayment(Guid guid);
         Task<int> UpdatePayment(PaymentModel model);
     }
