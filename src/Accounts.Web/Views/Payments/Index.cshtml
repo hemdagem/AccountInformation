@@ -1,6 +1,6 @@
 ﻿@model Accounts.Web.Models.HomeControllerModel
 @Html.Partial("PaymentSummary")
-@Html.HiddenFor(model => model.Users, new { Id = "user" })
+@Html.HiddenFor(model => model.User, new { Id = "user" })
 @Html.Partial("AddPayment")
 <div class="row">
     <div class="container">

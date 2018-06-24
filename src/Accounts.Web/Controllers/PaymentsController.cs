@@ -29,7 +29,7 @@ namespace Accounts.Web.Controllers
 
         public async Task<ActionResult> Index(Guid id)
         {
-            var homeControllerModel = new HomeControllerModel { Users = id };
+            var homeControllerModel = new HomeControllerModel { User = id };
             var userModel = await _userRepository.GetUser(id);
 
             if (userModel == null)

@@ -1,6 +1,4 @@
-using System;
-
-namespace Accounts.Web.Core.Models
+namespace Accounts.Web.Models
 {
     public class ErrorViewModel
     {

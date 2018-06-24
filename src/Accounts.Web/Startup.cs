@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Accounts.Core.Helpers;
+﻿using Accounts.Core.Helpers;
 using Accounts.Core.ModelBuilders;
 using Accounts.Core.Repositories;
 using Accounts.Core.Repositories.Interfaces;
@@ -16,7 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Accounts.Web.Core
+namespace Accounts.Web
 {
     public class Startup
     {
