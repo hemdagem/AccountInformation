@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   accounts.web:
@@ -6,3 +6,10 @@ services:
     build:
       context: .
       dockerfile: ../Accounts.Web/Dockerfile
+
+  accounts.api:
+    image: accountsapi
+    build:
+      context: .
+      dockerfile: src/Accounts.API/Dockerfile
+

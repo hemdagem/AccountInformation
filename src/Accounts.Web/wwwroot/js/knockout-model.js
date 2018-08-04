@@ -52,7 +52,7 @@ function PaymentViewModel() {
     self.ConfirmDeletePayment = function () {
 
         var model = {
-            paymentId: $("#paymentIdHid").val()
+            Id: $("#paymentIdHid").val()
         };
 
         $.ajax("/Payments/DeletePayment", {
@@ -123,7 +123,7 @@ function PaymentViewModel() {
         this.PaidYearly = ko.observable(data.paidYearly);
         this.Recurring = ko.observable(data.recurring);
 
-        var currentDay = getDate(new Date(parseInt(data.date.substr(6))));
+        var currentDay = getDate(new Date(data.date.substr(0,10)));
 
         this.Day = ko.observable(currentDay.day);
         this.Date = ko.observable(currentDay.fullDate);

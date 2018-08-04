@@ -1,4 +1,4 @@
-version: '3'
+version: '3.4'
 
 services:
   accounts.web:
@@ -6,3 +6,10 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80"
+
+  accounts.api:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "80"
+

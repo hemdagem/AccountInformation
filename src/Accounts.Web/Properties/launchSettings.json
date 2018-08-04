@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Accounts.Web.Core": {
+    "Accounts.Web": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

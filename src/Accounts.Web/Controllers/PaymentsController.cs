@@ -64,12 +64,14 @@ namespace Accounts.Web.Controllers
             return Json(addPayment);
         }
 
-        public async Task<JsonResult> DeletePayment(Guid paymentId)
+        [HttpPost]
+        public async Task<JsonResult> DeletePayment([FromBody]PaymentModel paymentModel)
         {
-            int addPayment = await _paymentRepository.DeletePayment(paymentId);
+            int addPayment = await _paymentRepository.DeletePayment(paymentModel.Id);
             return Json(addPayment);
         }
 
+        [HttpPost]
         public async Task<JsonResult> UpdatePayment([FromBody]PaymentModel model)
         {
             var buildCoreModel = _mapper.Map<Accounts.Core.Models.PaymentModel>(model);

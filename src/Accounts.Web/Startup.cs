@@ -1,4 +1,7 @@
-﻿using Accounts.Core.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Accounts.Core.Helpers;
 using Accounts.Core.ModelBuilders;
 using Accounts.Core.Repositories;
 using Accounts.Core.Repositories.Interfaces;
@@ -11,6 +14,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Refit;
 
 namespace Accounts.Web
 {
@@ -27,7 +31,8 @@ namespace Accounts.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
+            services.AddRefitClient<IWebApi>()
+                .ConfigureHttpClient(x => x.BaseAddress = new Uri("http://localhost:49322"));
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
@@ -72,5 +77,25 @@ namespace Accounts.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
+
+        public class Class1
+        {
+            private IWebApi _restService;
+
+            public Class1(IWebApi restService)
+            {
+                _restService = restService;
+            }
+            public void dosomething()
+            {
+                _restService.Get();
+            }
+        }
+    }
+
+    public interface IWebApi
+    {
+        [Get("/api/values")]
+        Task<IEnumerable<string>> Get();
     }
 }
